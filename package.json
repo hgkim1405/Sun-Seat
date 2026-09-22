@@ -1,0 +1,20 @@
+{
+  "name": "sunseat-poc",
+  "private": true,
+  "type": "module",
+  "workspaces": ["server", "frontend"],
+  "scripts": {
+    "dev:front": "npm --workspace frontend run dev",
+    "build:front": "npm --workspace frontend run build",
+    "test:server": "npm --workspace server test",
+    "test:python": "python\\.venv\\Scripts\\python.exe -m pytest -q python",
+    "sync:tago-stations": "node scripts/sync-tago-stations.mjs",
+    "sync:korail-seat-layouts": "node scripts/sync-korail-seat-layouts.mjs",
+    "validate:seat-layouts": "node scripts/validate-seat-layouts.mjs",
+    "sync:korail-timetables": "python\\.venv\\Scripts\\python.exe python\\scripts\\sync_korail_timetables.py",
+    "parse:korail-timetables": "python\\.venv\\Scripts\\python.exe python\\scripts\\parse_korail_timetables.py"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}

@@ -1,0 +1,628 @@
+{
+  "generatedAt": "2026-09-22T06:04:03.585Z",
+  "dates": {
+    "plan": "20260922",
+    "actual": "20260921"
+  },
+  "discovered": {
+    "seoulCityCode": "11",
+    "busanCityCode": "21",
+    "seoulStationId": "NAT010000",
+    "busanStationId": "NAT014445"
+  },
+  "services": {
+    "TAGO 도시코드": {
+      "request": {
+        "service": "TAGO",
+        "method": "GET",
+        "endpoint": "/GetCtyCodeList",
+        "params": {
+          "_type": "json"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyCodeList?serviceKey=***REDACTED***&_type=json",
+      "elapsedMs": 217,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 16,
+          "keys": [
+            "citycode",
+            "cityname"
+          ],
+          "sample": {
+            "citycode": "11",
+            "cityname": "서울특별시"
+          }
+        }
+      ],
+      "pagination": [],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "00"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "NORMAL SERVICE."
+        }
+      ],
+      "error": null
+    },
+    "TAGO 차량종류": {
+      "request": {
+        "service": "TAGO",
+        "method": "GET",
+        "endpoint": "/GetVhcleKndList",
+        "params": {
+          "_type": "json"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetVhcleKndList?serviceKey=***REDACTED***&_type=json",
+      "elapsedMs": 42,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 15,
+          "keys": [
+            "vehiclekndid",
+            "vehiclekndnm"
+          ],
+          "sample": {
+            "vehiclekndid": "00",
+            "vehiclekndnm": "KTX"
+          }
+        }
+      ],
+      "pagination": [],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "00"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "NORMAL SERVICE."
+        }
+      ],
+      "error": null
+    },
+    "TAGO 서울 역목록": {
+      "request": {
+        "service": "TAGO",
+        "method": "GET",
+        "endpoint": "/GetCtyAcctoTrainSttnList",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "_type": "json",
+          "cityCode": "11"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&_type=json&cityCode=11",
+      "elapsedMs": 36,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 12,
+          "keys": [
+            "nodeid",
+            "nodename"
+          ],
+          "sample": {
+            "nodeid": "NAT010000",
+            "nodename": "서울"
+          }
+        }
+      ],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 200
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 12
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "00"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "NORMAL SERVICE."
+        }
+      ],
+      "error": null
+    },
+    "TAGO 부산 역목록": {
+      "request": {
+        "service": "TAGO",
+        "method": "GET",
+        "endpoint": "/GetCtyAcctoTrainSttnList",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "_type": "json",
+          "cityCode": "21"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&_type=json&cityCode=21",
+      "elapsedMs": 38,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 11,
+          "keys": [
+            "nodeid",
+            "nodename"
+          ],
+          "sample": {
+            "nodeid": "NAT014281",
+            "nodename": "구포"
+          }
+        }
+      ],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 200
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 11
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "00"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "NORMAL SERVICE."
+        }
+      ],
+      "error": null
+    },
+    "TAGO 서울→부산 열차": {
+      "request": {
+        "service": "TAGO",
+        "method": "GET",
+        "endpoint": "/GetStrtpntAlocFndTrainInfo",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "_type": "json",
+          "depPlaceId": "NAT010000",
+          "arrPlaceId": "NAT014445",
+          "depPlandTime": "20260922"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetStrtpntAlocFndTrainInfo?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&_type=json&depPlaceId=NAT010000&arrPlaceId=NAT014445&depPlandTime=20260922",
+      "elapsedMs": 361,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 75,
+          "keys": [
+            "trainno",
+            "traingradename",
+            "depplacename",
+            "arrplacename",
+            "depplandtime",
+            "arrplandtime",
+            "adultcharge"
+          ],
+          "sample": {
+            "trainno": "00001",
+            "traingradename": "KTX",
+            "depplacename": "서울",
+            "arrplacename": "부산",
+            "depplandtime": "20260922051300",
+            "arrplandtime": "20260922075000",
+            "adultcharge": "51200"
+          }
+        }
+      ],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 200
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 75
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "00"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "NORMAL SERVICE."
+        }
+      ],
+      "error": null
+    },
+    "KORAIL 서울 코드": {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/codes2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "returnType": "JSON",
+          "cond[value::LIKE]": "서울"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/codes2?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&returnType=JSON&cond%5Bvalue%3A%3ALIKE%5D=%EC%84%9C%EC%9A%B8",
+      "elapsedMs": 655,
+      "arrays": [],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 200
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 0
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "0"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "정상"
+        }
+      ],
+      "error": null
+    },
+    "KORAIL 부산 코드": {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/codes2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "returnType": "JSON",
+          "cond[value::LIKE]": "부산"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/codes2?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&returnType=JSON&cond%5Bvalue%3A%3ALIKE%5D=%EB%B6%80%EC%82%B0",
+      "elapsedMs": 73,
+      "arrays": [],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 200
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 0
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "0"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "정상"
+        }
+      ],
+      "error": null
+    },
+    "KORAIL 서울→부산 운행계획": {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/travelerTrainRunPlan2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 500,
+          "returnType": "JSON",
+          "cond[run_ymd::GTE]": "20260922",
+          "cond[run_ymd::LTE]": "20260922",
+          "cond[dptre_stn_nm::EQ]": "서울",
+          "cond[arvl_stn_nm::EQ]": "부산"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/travelerTrainRunPlan2?serviceKey=***REDACTED***&pageNo=1&numOfRows=500&returnType=JSON&cond%5Brun_ymd%3A%3AGTE%5D=20260922&cond%5Brun_ymd%3A%3ALTE%5D=20260922&cond%5Bdptre_stn_nm%3A%3AEQ%5D=%EC%84%9C%EC%9A%B8&cond%5Barvl_stn_nm%3A%3AEQ%5D=%EB%B6%80%EC%82%B0",
+      "elapsedMs": 140,
+      "arrays": [],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 500
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 0
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "0"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "정상"
+        }
+      ],
+      "error": null
+    },
+    "KORAIL 날짜 전체 운행계획": {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/travelerTrainRunPlan2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 500,
+          "returnType": "JSON",
+          "cond[run_ymd::GTE]": "20260922",
+          "cond[run_ymd::LTE]": "20260922"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/travelerTrainRunPlan2?serviceKey=***REDACTED***&pageNo=1&numOfRows=500&returnType=JSON&cond%5Brun_ymd%3A%3AGTE%5D=20260922&cond%5Brun_ymd%3A%3ALTE%5D=20260922",
+      "elapsedMs": 196,
+      "arrays": [],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 500
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 0
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "0"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "정상"
+        }
+      ],
+      "error": null
+    },
+    "KORAIL 서울 실제운행": {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/travelerTrainRunInfo2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 500,
+          "returnType": "JSON",
+          "cond[run_ymd::GTE]": "20260921",
+          "cond[run_ymd::LTE]": "20260921",
+          "cond[stn_nm::EQ]": "서울"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/travelerTrainRunInfo2?serviceKey=***REDACTED***&pageNo=1&numOfRows=500&returnType=JSON&cond%5Brun_ymd%3A%3AGTE%5D=20260921&cond%5Brun_ymd%3A%3ALTE%5D=20260921&cond%5Bstn_nm%3A%3AEQ%5D=%EC%84%9C%EC%9A%B8",
+      "elapsedMs": 583,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 313,
+          "keys": [
+            "mrnt_cd",
+            "mrnt_nm",
+            "run_ymd",
+            "stn_cd",
+            "stn_nm",
+            "stop_se_cd",
+            "stop_se_nm",
+            "trn_arvl_dt",
+            "trn_dptre_dt",
+            "trn_no",
+            "trn_run_sn",
+            "uppln_dn_se_cd"
+          ],
+          "sample": {
+            "mrnt_cd": "01",
+            "mrnt_nm": "경부선",
+            "run_ymd": "20260921",
+            "stn_cd": "3900023",
+            "stn_nm": "서울",
+            "stop_se_cd": "01",
+            "stop_se_nm": "시발",
+            "trn_arvl_dt": null,
+            "trn_dptre_dt": "2026-09-21 05:13:00.0",
+            "trn_no": "00001",
+            "trn_run_sn": "1",
+            "uppln_dn_se_cd": "D"
+          }
+        }
+      ],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 500
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 313
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "0"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "정상"
+        }
+      ],
+      "error": null
+    },
+    "KORAIL 날짜 전체 실제운행": {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/travelerTrainRunInfo2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 500,
+          "returnType": "JSON",
+          "cond[run_ymd::GTE]": "20260921",
+          "cond[run_ymd::LTE]": "20260921"
+        }
+      },
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/travelerTrainRunInfo2?serviceKey=***REDACTED***&pageNo=1&numOfRows=500&returnType=JSON&cond%5Brun_ymd%3A%3AGTE%5D=20260921&cond%5Brun_ymd%3A%3ALTE%5D=20260921",
+      "elapsedMs": 392,
+      "arrays": [
+        {
+          "path": "$.response.body.items.item",
+          "length": 500,
+          "keys": [
+            "mrnt_cd",
+            "mrnt_nm",
+            "run_ymd",
+            "stn_cd",
+            "stn_nm",
+            "stop_se_cd",
+            "stop_se_nm",
+            "trn_arvl_dt",
+            "trn_dptre_dt",
+            "trn_no",
+            "trn_run_sn",
+            "uppln_dn_se_cd"
+          ],
+          "sample": {
+            "mrnt_cd": "01",
+            "mrnt_nm": "경부선",
+            "run_ymd": "20260921",
+            "stn_cd": "3900023",
+            "stn_nm": "서울",
+            "stop_se_cd": "01",
+            "stop_se_nm": "시발",
+            "trn_arvl_dt": null,
+            "trn_dptre_dt": "2026-09-21 05:13:00.0",
+            "trn_no": "00001",
+            "trn_run_sn": "1",
+            "uppln_dn_se_cd": "D"
+          }
+        }
+      ],
+      "pagination": [
+        {
+          "path": "$.response.body.numOfRows",
+          "value": 500
+        },
+        {
+          "path": "$.response.body.pageNo",
+          "value": 1
+        },
+        {
+          "path": "$.response.body.totalCount",
+          "value": 9779
+        }
+      ],
+      "errorSignals": [
+        {
+          "path": "$.response.header.resultCode",
+          "value": "0"
+        },
+        {
+          "path": "$.response.header.resultMsg",
+          "value": "정상"
+        }
+      ],
+      "error": null
+    }
+  }
+}

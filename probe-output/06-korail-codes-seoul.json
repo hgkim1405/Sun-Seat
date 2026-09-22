@@ -1,0 +1,84 @@
+{
+  "selected": {
+    "request": {
+      "service": "KORAIL",
+      "method": "GET",
+      "endpoint": "/codes2",
+      "params": {
+        "pageNo": 1,
+        "numOfRows": 200,
+        "returnType": "JSON",
+        "cond[value::LIKE]": "서울"
+      }
+    },
+    "response": {
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "statusText": "OK",
+      "contentType": "application/json; charset=UTF-8",
+      "elapsedMs": 655,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/codes2?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&returnType=JSON&cond%5Bvalue%3A%3ALIKE%5D=%EC%84%9C%EC%9A%B8",
+      "body": {
+        "response": {
+          "body": {
+            "dataType": "JSON",
+            "items": {
+              "item": []
+            },
+            "numOfRows": 200,
+            "pageNo": 1,
+            "totalCount": 0
+          },
+          "header": {
+            "resultCode": "0",
+            "resultMsg": "정상"
+          }
+        }
+      }
+    }
+  },
+  "attempts": [
+    {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/codes2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "returnType": "JSON",
+          "cond[value::LIKE]": "서울"
+        }
+      },
+      "response": {
+        "networkOk": true,
+        "httpOk": true,
+        "status": 200,
+        "statusText": "OK",
+        "contentType": "application/json; charset=UTF-8",
+        "elapsedMs": 655,
+        "keyMode": "decoded",
+        "requestUrl": "https://apis.data.go.kr/B551457/run/v2/codes2?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&returnType=JSON&cond%5Bvalue%3A%3ALIKE%5D=%EC%84%9C%EC%9A%B8",
+        "body": {
+          "response": {
+            "body": {
+              "dataType": "JSON",
+              "items": {
+                "item": []
+              },
+              "numOfRows": 200,
+              "pageNo": 1,
+              "totalCount": 0
+            },
+            "header": {
+              "resultCode": "0",
+              "resultMsg": "정상"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

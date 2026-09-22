@@ -1,0 +1,172 @@
+{
+  "selected": {
+    "request": {
+      "service": "TAGO",
+      "method": "GET",
+      "endpoint": "/GetCtyAcctoTrainSttnList",
+      "params": {
+        "pageNo": 1,
+        "numOfRows": 200,
+        "_type": "json",
+        "cityCode": "21"
+      }
+    },
+    "response": {
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "statusText": "OK",
+      "contentType": "application/json;charset=UTF-8",
+      "elapsedMs": 38,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&_type=json&cityCode=21",
+      "body": {
+        "response": {
+          "header": {
+            "resultCode": "00",
+            "resultMsg": "NORMAL SERVICE."
+          },
+          "body": {
+            "items": {
+              "item": [
+                {
+                  "nodeid": "NAT014281",
+                  "nodename": "구포"
+                },
+                {
+                  "nodeid": "NAT014445",
+                  "nodename": "부산"
+                },
+                {
+                  "nodeid": "NAT750412",
+                  "nodename": "좌천"
+                },
+                {
+                  "nodeid": "NAT750189",
+                  "nodename": "신해운대"
+                },
+                {
+                  "nodeid": "NAT014331",
+                  "nodename": "사상"
+                },
+                {
+                  "nodeid": "NAT750329",
+                  "nodename": "기장"
+                },
+                {
+                  "nodeid": "NAT750254",
+                  "nodename": "송정"
+                },
+                {
+                  "nodeid": "NAT750106",
+                  "nodename": "동래"
+                },
+                {
+                  "nodeid": "NAT750046",
+                  "nodename": "부전"
+                },
+                {
+                  "nodeid": "NAT014244",
+                  "nodename": "화명"
+                },
+                {
+                  "nodeid": "NAT750161",
+                  "nodename": "센텀"
+                }
+              ]
+            },
+            "numOfRows": 200,
+            "pageNo": 1,
+            "totalCount": 11
+          }
+        }
+      }
+    }
+  },
+  "attempts": [
+    {
+      "request": {
+        "service": "TAGO",
+        "method": "GET",
+        "endpoint": "/GetCtyAcctoTrainSttnList",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 200,
+          "_type": "json",
+          "cityCode": "21"
+        }
+      },
+      "response": {
+        "networkOk": true,
+        "httpOk": true,
+        "status": 200,
+        "statusText": "OK",
+        "contentType": "application/json;charset=UTF-8",
+        "elapsedMs": 38,
+        "keyMode": "decoded",
+        "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=200&_type=json&cityCode=21",
+        "body": {
+          "response": {
+            "header": {
+              "resultCode": "00",
+              "resultMsg": "NORMAL SERVICE."
+            },
+            "body": {
+              "items": {
+                "item": [
+                  {
+                    "nodeid": "NAT014281",
+                    "nodename": "구포"
+                  },
+                  {
+                    "nodeid": "NAT014445",
+                    "nodename": "부산"
+                  },
+                  {
+                    "nodeid": "NAT750412",
+                    "nodename": "좌천"
+                  },
+                  {
+                    "nodeid": "NAT750189",
+                    "nodename": "신해운대"
+                  },
+                  {
+                    "nodeid": "NAT014331",
+                    "nodename": "사상"
+                  },
+                  {
+                    "nodeid": "NAT750329",
+                    "nodename": "기장"
+                  },
+                  {
+                    "nodeid": "NAT750254",
+                    "nodename": "송정"
+                  },
+                  {
+                    "nodeid": "NAT750106",
+                    "nodename": "동래"
+                  },
+                  {
+                    "nodeid": "NAT750046",
+                    "nodename": "부전"
+                  },
+                  {
+                    "nodeid": "NAT014244",
+                    "nodename": "화명"
+                  },
+                  {
+                    "nodeid": "NAT750161",
+                    "nodename": "센텀"
+                  }
+                ]
+              },
+              "numOfRows": 200,
+              "pageNo": 1,
+              "totalCount": 11
+            }
+          }
+        }
+      }
+    }
+  ]
+}

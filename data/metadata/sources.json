@@ -1,0 +1,25 @@
+{
+  "scheduleSource": {
+    "primary": "TAGO train information REST API",
+    "configured": false,
+    "note": "Set TAGO_SCHEDULE_URL and TAGO_SERVICE_KEY in the Node environment. No schedule is fabricated when unavailable."
+  },
+  "railwaySource": {
+    "provider": "OpenStreetMap Overpass",
+    "snapshot": "data/raw/osm/south-korea-rail-corridor.json",
+    "routeId": "seoul-busan",
+    "routeVersion": "osm-overpass-2026-09-22",
+    "attribution": "© OpenStreetMap contributors"
+  },
+  "solarSource": {
+    "provider": "NOAA solar position equations",
+    "weather": "clear-sky geometry only",
+    "shadow": "not modelled"
+  },
+  "seatSource": {
+    "provider": "KORAIL public seat-plan HTML",
+    "available": true,
+    "mode": "STRUCTURAL_ONLY",
+    "note": "Verified seat identifiers and carriage layouts are available. Live remaining-seat availability is not requested or inferred."
+  }
+}

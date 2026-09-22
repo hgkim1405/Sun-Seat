@@ -1,0 +1,202 @@
+{
+  "provider": "TAGO",
+  "generatedAt": "2026-09-22T06:54:14.012Z",
+  "cityRequest": {
+    "endpoint": "GetCtyCodeList",
+    "params": {},
+    "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyCodeList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json",
+    "status": 200
+  },
+  "cityCount": 16,
+  "stationCount": 349,
+  "matches": [
+    {
+      "station": "서울",
+      "status": "MATCHED",
+      "tagoCode": "NAT010000",
+      "tagoName": "서울",
+      "cityCode": "11"
+    },
+    {
+      "station": "광명",
+      "status": "MATCHED",
+      "tagoCode": "NATH10219",
+      "tagoName": "광명",
+      "cityCode": "31"
+    },
+    {
+      "station": "오송",
+      "status": "MATCHED",
+      "tagoCode": "NAT050044",
+      "tagoName": "오송",
+      "cityCode": "33"
+    },
+    {
+      "station": "대전",
+      "status": "MATCHED",
+      "tagoCode": "NAT011668",
+      "tagoName": "대전",
+      "cityCode": "25"
+    },
+    {
+      "station": "동대구",
+      "status": "MATCHED",
+      "tagoCode": "NAT013271",
+      "tagoName": "동대구",
+      "cityCode": "22"
+    },
+    {
+      "station": "부산",
+      "status": "MATCHED",
+      "tagoCode": "NAT014445",
+      "tagoName": "부산",
+      "cityCode": "21"
+    }
+  ],
+  "requests": [
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "11"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=11",
+      "status": 200,
+      "itemCount": 12
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "12"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=12",
+      "status": 200,
+      "itemCount": 4
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "21"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=21",
+      "status": 200,
+      "itemCount": 11
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "22"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=22",
+      "status": 200,
+      "itemCount": 5
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "23"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=23",
+      "status": 200,
+      "itemCount": 4
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "24"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=24",
+      "status": 200,
+      "itemCount": 5
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "25"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=25",
+      "status": 200,
+      "itemCount": 4
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "26"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=26",
+      "status": 200,
+      "itemCount": 6
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "31"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=31",
+      "status": 200,
+      "itemCount": 56
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "32"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=32",
+      "status": 200,
+      "itemCount": 48
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "33"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=33",
+      "status": 200,
+      "itemCount": 28
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "34"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=34",
+      "status": 200,
+      "itemCount": 26
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "35"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=35",
+      "status": 200,
+      "itemCount": 16
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "36"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=36",
+      "status": 200,
+      "itemCount": 35
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "37"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=37",
+      "status": 200,
+      "itemCount": 63
+    },
+    {
+      "endpoint": "GetCtyAcctoTrainSttnList",
+      "params": {
+        "cityCode": "38"
+      },
+      "requestUrl": "https://apis.data.go.kr/1613000/TrainInfo/GetCtyAcctoTrainSttnList?serviceKey=***REDACTED***&pageNo=1&numOfRows=1000&_type=json&cityCode=38",
+      "status": 200,
+      "itemCount": 26
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "selected": {
+    "request": {
+      "service": "KORAIL",
+      "method": "GET",
+      "endpoint": "/travelerTrainRunPlan2",
+      "params": {
+        "pageNo": 1,
+        "numOfRows": 500,
+        "returnType": "JSON",
+        "cond[run_ymd::GTE]": "20260922",
+        "cond[run_ymd::LTE]": "20260922",
+        "cond[dptre_stn_nm::EQ]": "서울",
+        "cond[arvl_stn_nm::EQ]": "부산"
+      }
+    },
+    "response": {
+      "networkOk": true,
+      "httpOk": true,
+      "status": 200,
+      "statusText": "OK",
+      "contentType": "application/json; charset=UTF-8",
+      "elapsedMs": 140,
+      "keyMode": "decoded",
+      "requestUrl": "https://apis.data.go.kr/B551457/run/v2/travelerTrainRunPlan2?serviceKey=***REDACTED***&pageNo=1&numOfRows=500&returnType=JSON&cond%5Brun_ymd%3A%3AGTE%5D=20260922&cond%5Brun_ymd%3A%3ALTE%5D=20260922&cond%5Bdptre_stn_nm%3A%3AEQ%5D=%EC%84%9C%EC%9A%B8&cond%5Barvl_stn_nm%3A%3AEQ%5D=%EB%B6%80%EC%82%B0",
+      "body": {
+        "response": {
+          "body": {
+            "dataType": "JSON",
+            "items": {
+              "item": []
+            },
+            "numOfRows": 500,
+            "pageNo": 1,
+            "totalCount": 0
+          },
+          "header": {
+            "resultCode": "0",
+            "resultMsg": "정상"
+          }
+        }
+      }
+    }
+  },
+  "attempts": [
+    {
+      "request": {
+        "service": "KORAIL",
+        "method": "GET",
+        "endpoint": "/travelerTrainRunPlan2",
+        "params": {
+          "pageNo": 1,
+          "numOfRows": 500,
+          "returnType": "JSON",
+          "cond[run_ymd::GTE]": "20260922",
+          "cond[run_ymd::LTE]": "20260922",
+          "cond[dptre_stn_nm::EQ]": "서울",
+          "cond[arvl_stn_nm::EQ]": "부산"
+        }
+      },
+      "response": {
+        "networkOk": true,
+        "httpOk": true,
+        "status": 200,
+        "statusText": "OK",
+        "contentType": "application/json; charset=UTF-8",
+        "elapsedMs": 140,
+        "keyMode": "decoded",
+        "requestUrl": "https://apis.data.go.kr/B551457/run/v2/travelerTrainRunPlan2?serviceKey=***REDACTED***&pageNo=1&numOfRows=500&returnType=JSON&cond%5Brun_ymd%3A%3AGTE%5D=20260922&cond%5Brun_ymd%3A%3ALTE%5D=20260922&cond%5Bdptre_stn_nm%3A%3AEQ%5D=%EC%84%9C%EC%9A%B8&cond%5Barvl_stn_nm%3A%3AEQ%5D=%EB%B6%80%EC%82%B0",
+        "body": {
+          "response": {
+            "body": {
+              "dataType": "JSON",
+              "items": {
+                "item": []
+              },
+              "numOfRows": 500,
+              "pageNo": 1,
+              "totalCount": 0
+            },
+            "header": {
+              "resultCode": "0",
+              "resultMsg": "정상"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

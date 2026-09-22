@@ -1,0 +1,149 @@
+{
+  "version": "korail-2026-09-22",
+  "provider": "KORAIL",
+  "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+  "generatedAt": "2026-09-22T07:34:52.819Z",
+  "rollingStocks": [
+    {
+      "id": "00",
+      "displayName": "KTX",
+      "layoutId": "KTX",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "07",
+      "displayName": "KTX-산천(A-type)",
+      "layoutId": "KTX-SANCHEON-A",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "10",
+      "displayName": "KTX-산천(B-type)",
+      "layoutId": "KTX-SANCHEON-B",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "0A",
+      "displayName": "KTX-산천",
+      "layoutId": null,
+      "layoutVariants": [
+        "KTX-SANCHEON-A",
+        "KTX-SANCHEON-B"
+      ],
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "16",
+      "displayName": "KTX-이음",
+      "layoutId": "KTX-EUM",
+      "layoutVariants": [
+        "KTX-EUM",
+        "KTX-EUM-12CAR"
+      ],
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "19",
+      "displayName": "KTX-청룡",
+      "layoutId": "KTX-CHEONGRYONG",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "08",
+      "displayName": "ITX-새마을",
+      "layoutId": "ITX-SAEMAEUL",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "09",
+      "displayName": "ITX-청춘",
+      "layoutId": "ITX-CHEONGCHUN",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "18",
+      "displayName": "ITX-마음",
+      "layoutId": "ITX-MAUM",
+      "layoutVariants": [
+        "ITX-MAUM",
+        "ITX-MAUM-EMU"
+      ],
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "04",
+      "displayName": "누리로",
+      "layoutId": "NURIRO",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "02",
+      "displayName": "무궁화호",
+      "layoutId": null,
+      "layoutVariants": [
+        "MUGUNGHWA-52",
+        "MUGUNGHWA-53",
+        "MUGUNGHWA-56",
+        "MUGUNGHWA-64",
+        "MUGUNGHWA-68",
+        "MUGUNGHWA-72"
+      ],
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "01",
+      "displayName": "새마을호",
+      "layoutId": "SAEMAEUL",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    },
+    {
+      "id": "03",
+      "displayName": "통근열차",
+      "layoutId": null,
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": false
+    },
+    {
+      "id": "06",
+      "displayName": "AREX직통",
+      "layoutId": null,
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": false
+    },
+    {
+      "id": "17",
+      "displayName": "SRT",
+      "layoutId": "SRT",
+      "sourceUrl": "https://www.korail.com/ticket/train/trainGuide/seatingPlan",
+      "verifiedAt": "2026-09-22T07:34:52.819Z",
+      "seatMapAvailable": true
+    }
+  ],
+  "failures": []
+}

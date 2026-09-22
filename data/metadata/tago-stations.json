@@ -1,0 +1,3149 @@
+{
+  "provider": "TAGO",
+  "endpoint": "/GetCtyAcctoTrainSttnList",
+  "generatedAt": "2026-09-22T06:54:14.012Z",
+  "stationCount": 349,
+  "stations": [
+    {
+      "id": "NAT280090",
+      "name": "가남",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "가남"
+      ]
+    },
+    {
+      "id": "NAT140576",
+      "name": "가평",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "가평"
+      ]
+    },
+    {
+      "id": "NAT012054",
+      "name": "각계",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "각계"
+      ]
+    },
+    {
+      "id": "NAT280212",
+      "name": "감곡장호원",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "감곡장호원"
+      ]
+    },
+    {
+      "id": "NAT030607",
+      "name": "강경",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "강경"
+      ]
+    },
+    {
+      "id": "NAT8B0671",
+      "name": "강구",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "강구"
+      ]
+    },
+    {
+      "id": "NAT601936",
+      "name": "강릉",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "강릉"
+      ]
+    },
+    {
+      "id": "NAT470446",
+      "name": "강진",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "강진"
+      ]
+    },
+    {
+      "id": "NAT140701",
+      "name": "강촌",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "강촌"
+      ]
+    },
+    {
+      "id": "NAT300733",
+      "name": "개포",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "개포"
+      ]
+    },
+    {
+      "id": "NATC10325",
+      "name": "검암",
+      "cityCode": "23",
+      "cityName": "인천광역시",
+      "aliases": [
+        "검암"
+      ]
+    },
+    {
+      "id": "NAT013395",
+      "name": "경산",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "경산"
+      ]
+    },
+    {
+      "id": "NATH13421",
+      "name": "경주",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "경주"
+      ]
+    },
+    {
+      "id": "NAT030254",
+      "name": "계룡",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "계룡"
+      ]
+    },
+    {
+      "id": "NAT752102",
+      "name": "고래불",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "고래불"
+      ]
+    },
+    {
+      "id": "NAT650828",
+      "name": "고한",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "고한"
+      ]
+    },
+    {
+      "id": "NAT041072",
+      "name": "곡성",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "곡성"
+      ]
+    },
+    {
+      "id": "NATH20438",
+      "name": "공주",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "공주"
+      ]
+    },
+    {
+      "id": "NAT040496",
+      "name": "관촌",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "관촌"
+      ]
+    },
+    {
+      "id": "NATH10219",
+      "name": "광명",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "광명"
+      ]
+    },
+    {
+      "id": "NAT881708",
+      "name": "광양",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "광양"
+      ]
+    },
+    {
+      "id": "NAT130182",
+      "name": "광운대",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "광운대"
+      ]
+    },
+    {
+      "id": "NAT883012",
+      "name": "광주",
+      "cityCode": "24",
+      "cityName": "광주광역시",
+      "aliases": [
+        "광주"
+      ]
+    },
+    {
+      "id": "NAT031857",
+      "name": "광주송정",
+      "cityCode": "24",
+      "cityName": "광주광역시",
+      "aliases": [
+        "광주송정"
+      ]
+    },
+    {
+      "id": "NAT080749",
+      "name": "광천",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "광천"
+      ]
+    },
+    {
+      "id": "NAT041285",
+      "name": "구례구",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "구례구"
+      ]
+    },
+    {
+      "id": "NAT012775",
+      "name": "구미",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "구미"
+      ]
+    },
+    {
+      "id": "NAT023821",
+      "name": "구서경주",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "구서경주"
+      ]
+    },
+    {
+      "id": "NAT751296",
+      "name": "구안강",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "구안강"
+      ]
+    },
+    {
+      "id": "NAT014281",
+      "name": "구포",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "구포"
+      ]
+    },
+    {
+      "id": "NAT880608",
+      "name": "군북",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "군북"
+      ]
+    },
+    {
+      "id": "NAT081388",
+      "name": "군산",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "군산"
+      ]
+    },
+    {
+      "id": "NAT023073",
+      "name": "군위",
+      "cityCode": "22",
+      "cityName": "대구광역시",
+      "aliases": [
+        "군위"
+      ]
+    },
+    {
+      "id": "NAT883086",
+      "name": "극락강",
+      "cityCode": "24",
+      "cityName": "광주광역시",
+      "aliases": [
+        "극락강"
+      ]
+    },
+    {
+      "id": "NAT752946",
+      "name": "근덕",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "근덕"
+      ]
+    },
+    {
+      "id": "NAT752319",
+      "name": "기성",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "기성"
+      ]
+    },
+    {
+      "id": "NAT750329",
+      "name": "기장",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "기장"
+      ]
+    },
+    {
+      "id": "NAT140787",
+      "name": "김유정",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "김유정"
+      ]
+    },
+    {
+      "id": "NAT031056",
+      "name": "김제",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "김제"
+      ]
+    },
+    {
+      "id": "NAT012546",
+      "name": "김천",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "김천"
+      ]
+    },
+    {
+      "id": "NATH12383",
+      "name": "김천구미",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "김천구미"
+      ]
+    },
+    {
+      "id": "NAT610326",
+      "name": "나전",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "나전"
+      ]
+    },
+    {
+      "id": "NAT031998",
+      "name": "나주",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "나주"
+      ]
+    },
+    {
+      "id": "NAT013542",
+      "name": "남성현",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "남성현"
+      ]
+    },
+    {
+      "id": "NAT040868",
+      "name": "남원",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "남원"
+      ]
+    },
+    {
+      "id": "NAT750560",
+      "name": "남창",
+      "cityCode": "26",
+      "cityName": "울산광역시",
+      "aliases": [
+        "남창"
+      ]
+    },
+    {
+      "id": "NAT140840",
+      "name": "남춘천",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "남춘천"
+      ]
+    },
+    {
+      "id": "NAT882847",
+      "name": "남평",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "남평"
+      ]
+    },
+    {
+      "id": "NAT010058",
+      "name": "노량진",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "노량진"
+      ]
+    },
+    {
+      "id": "NAT030508",
+      "name": "논산",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "논산"
+      ]
+    },
+    {
+      "id": "NAT110165",
+      "name": "능곡",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "능곡"
+      ]
+    },
+    {
+      "id": "NAT882666",
+      "name": "능주",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "능주"
+      ]
+    },
+    {
+      "id": "NAT032099",
+      "name": "다시",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "다시"
+      ]
+    },
+    {
+      "id": "NAT021784",
+      "name": "단양",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "단양"
+      ]
+    },
+    {
+      "id": "NAT110180",
+      "name": "대곡",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "대곡"
+      ]
+    },
+    {
+      "id": "NAT130844",
+      "name": "대광리",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "대광리"
+      ]
+    },
+    {
+      "id": "NAT013239",
+      "name": "대구",
+      "cityCode": "22",
+      "cityName": "대구광역시",
+      "aliases": [
+        "대구"
+      ]
+    },
+    {
+      "id": "NAT140362",
+      "name": "대성리",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "대성리"
+      ]
+    },
+    {
+      "id": "NAT320131",
+      "name": "대야",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "대야"
+      ]
+    },
+    {
+      "id": "NAT011668",
+      "name": "대전",
+      "cityCode": "25",
+      "cityName": "대전광역시",
+      "aliases": [
+        "대전"
+      ]
+    },
+    {
+      "id": "NAT080952",
+      "name": "대천",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "대천"
+      ]
+    },
+    {
+      "id": "NAT020178",
+      "name": "덕소",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "덕소"
+      ]
+    },
+    {
+      "id": "NAT750653",
+      "name": "덕하",
+      "cityCode": "26",
+      "cityName": "울산광역시",
+      "aliases": [
+        "덕하"
+      ]
+    },
+    {
+      "id": "NAT601122",
+      "name": "도계",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "도계"
+      ]
+    },
+    {
+      "id": "NAT080309",
+      "name": "도고온천",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "도고온천"
+      ]
+    },
+    {
+      "id": "NAT021723",
+      "name": "도담",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "도담"
+      ]
+    },
+    {
+      "id": "NAT110557",
+      "name": "도라산",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "도라산"
+      ]
+    },
+    {
+      "id": "NAT013271",
+      "name": "동대구",
+      "cityCode": "22",
+      "cityName": "대구광역시",
+      "aliases": [
+        "동대구"
+      ]
+    },
+    {
+      "id": "NAT130531",
+      "name": "동두천",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "동두천"
+      ]
+    },
+    {
+      "id": "NAT750106",
+      "name": "동래",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "동래"
+      ]
+    },
+    {
+      "id": "NAT651053",
+      "name": "동백산",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "동백산"
+      ]
+    },
+    {
+      "id": "NAT040173",
+      "name": "동산",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "동산"
+      ]
+    },
+    {
+      "id": "NAT600830",
+      "name": "동점",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "동점"
+      ]
+    },
+    {
+      "id": "NATH30326",
+      "name": "동탄",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "동탄"
+      ]
+    },
+    {
+      "id": "NAT601485",
+      "name": "동해",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "동해"
+      ]
+    },
+    {
+      "id": "NAT020986",
+      "name": "동화",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "동화"
+      ]
+    },
+    {
+      "id": "NATN10428",
+      "name": "둔내",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "둔내"
+      ]
+    },
+    {
+      "id": "NAT882237",
+      "name": "득량",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "득량"
+      ]
+    },
+    {
+      "id": "NAT880345",
+      "name": "마산",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "마산"
+      ]
+    },
+    {
+      "id": "NAT140277",
+      "name": "마석",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "마석"
+      ]
+    },
+    {
+      "id": "NAT021033",
+      "name": "만종",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "만종"
+      ]
+    },
+    {
+      "id": "NAT601605",
+      "name": "망상",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "망상"
+      ]
+    },
+    {
+      "id": "NAT601602",
+      "name": "망상해변",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "망상해변"
+      ]
+    },
+    {
+      "id": "NAT020803",
+      "name": "매곡",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "매곡"
+      ]
+    },
+    {
+      "id": "NAT752428",
+      "name": "매화",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "매화"
+      ]
+    },
+    {
+      "id": "NAT882416",
+      "name": "명봉",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "명봉"
+      ]
+    },
+    {
+      "id": "NAT032563",
+      "name": "목포",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "목포"
+      ]
+    },
+    {
+      "id": "NAT050881",
+      "name": "목행",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "목행"
+      ]
+    },
+    {
+      "id": "NAT032313",
+      "name": "몽탄",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "몽탄"
+      ]
+    },
+    {
+      "id": "NAT032273",
+      "name": "무안",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "무안"
+      ]
+    },
+    {
+      "id": "NAT601545",
+      "name": "묵호",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "묵호"
+      ]
+    },
+    {
+      "id": "NAT280927",
+      "name": "문경",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "문경"
+      ]
+    },
+    {
+      "id": "NAT110460",
+      "name": "문산",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "문산"
+      ]
+    },
+    {
+      "id": "NAT014150",
+      "name": "물금",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "물금"
+      ]
+    },
+    {
+      "id": "NAT650722",
+      "name": "민둥산",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "민둥산"
+      ]
+    },
+    {
+      "id": "NAT013841",
+      "name": "밀양",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "밀양"
+      ]
+    },
+    {
+      "id": "NAT021175",
+      "name": "반곡",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "반곡"
+      ]
+    },
+    {
+      "id": "NAT880766",
+      "name": "반성",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "반성"
+      ]
+    },
+    {
+      "id": "NAT130944",
+      "name": "백마고지",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "백마고지"
+      ]
+    },
+    {
+      "id": "NAT140681",
+      "name": "백양리",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "백양리"
+      ]
+    },
+    {
+      "id": "NAT031486",
+      "name": "백양사",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "백양사"
+      ]
+    },
+    {
+      "id": "NAT882034",
+      "name": "벌교",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "벌교"
+      ]
+    },
+    {
+      "id": "NAT610064",
+      "name": "별어곡",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "별어곡"
+      ]
+    },
+    {
+      "id": "NAT882328",
+      "name": "보성",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "보성"
+      ]
+    },
+    {
+      "id": "NAT600257",
+      "name": "봉성",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "봉성"
+      ]
+    },
+    {
+      "id": "NAT021478",
+      "name": "봉양",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "봉양"
+      ]
+    },
+    {
+      "id": "NAT600147",
+      "name": "봉화",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "봉화"
+      ]
+    },
+    {
+      "id": "NAT011403",
+      "name": "부강",
+      "cityCode": "12",
+      "cityName": "세종특별자치시",
+      "aliases": [
+        "부강"
+      ]
+    },
+    {
+      "id": "NAT250428",
+      "name": "부발",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "부발"
+      ]
+    },
+    {
+      "id": "NAT014445",
+      "name": "부산",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "부산"
+      ]
+    },
+    {
+      "id": "NAT750046",
+      "name": "부전",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "부전"
+      ]
+    },
+    {
+      "id": "NAT751354",
+      "name": "부조",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "부조"
+      ]
+    },
+    {
+      "id": "NAT060121",
+      "name": "부천",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "부천"
+      ]
+    },
+    {
+      "id": "NAT023424",
+      "name": "북영천",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "북영천"
+      ]
+    },
+    {
+      "id": "NAT750781",
+      "name": "북울산",
+      "cityCode": "26",
+      "cityName": "울산광역시",
+      "aliases": [
+        "북울산"
+      ]
+    },
+    {
+      "id": "NAT881269",
+      "name": "북천",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "북천"
+      ]
+    },
+    {
+      "id": "NAT600593",
+      "name": "분천",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "분천"
+      ]
+    },
+    {
+      "id": "NAT600635",
+      "name": "비동",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "비동"
+      ]
+    },
+    {
+      "id": "NAT012821",
+      "name": "사곡",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "사곡"
+      ]
+    },
+    {
+      "id": "NAT140133",
+      "name": "사릉",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "사릉"
+      ]
+    },
+    {
+      "id": "NAT751238",
+      "name": "사방",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "사방"
+      ]
+    },
+    {
+      "id": "NAT650782",
+      "name": "사북",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "사북"
+      ]
+    },
+    {
+      "id": "NAT014331",
+      "name": "사상",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "사상"
+      ]
+    },
+    {
+      "id": "NAT280666",
+      "name": "살미",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "살미"
+      ]
+    },
+    {
+      "id": "NAT013967",
+      "name": "삼랑진",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "삼랑진"
+      ]
+    },
+    {
+      "id": "NAT040133",
+      "name": "삼례",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "삼례"
+      ]
+    },
+    {
+      "id": "NAT020884",
+      "name": "삼산",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "삼산"
+      ]
+    },
+    {
+      "id": "NAT630129",
+      "name": "삼척",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "삼척"
+      ]
+    },
+    {
+      "id": "NAT630078",
+      "name": "삼척해변",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "삼척해변"
+      ]
+    },
+    {
+      "id": "NAT051006",
+      "name": "삼탄",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "삼탄"
+      ]
+    },
+    {
+      "id": "NAT080492",
+      "name": "삽교",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "삽교"
+      ]
+    },
+    {
+      "id": "NAT013747",
+      "name": "상동",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "상동"
+      ]
+    },
+    {
+      "id": "NAT020040",
+      "name": "상봉",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "상봉"
+      ]
+    },
+    {
+      "id": "NAT300360",
+      "name": "상주",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "상주"
+      ]
+    },
+    {
+      "id": "NAT8B0082",
+      "name": "서경주",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "서경주"
+      ]
+    },
+    {
+      "id": "NAT882936",
+      "name": "서광주",
+      "cityCode": "24",
+      "cityName": "광주광역시",
+      "aliases": [
+        "서광주"
+      ]
+    },
+    {
+      "id": "NAT013189",
+      "name": "서대구",
+      "cityCode": "22",
+      "cityName": "대구광역시",
+      "aliases": [
+        "서대구"
+      ]
+    },
+    {
+      "id": "NAT030057",
+      "name": "서대전",
+      "cityCode": "25",
+      "cityName": "대전광역시",
+      "aliases": [
+        "서대전"
+      ]
+    },
+    {
+      "id": "NAT130036",
+      "name": "서빙고",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "서빙고"
+      ]
+    },
+    {
+      "id": "NAT010000",
+      "name": "서울",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "서울"
+      ]
+    },
+    {
+      "id": "NAT020864",
+      "name": "서원주",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "서원주"
+      ]
+    },
+    {
+      "id": "NAT010670",
+      "name": "서정리",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "서정리"
+      ]
+    },
+    {
+      "id": "NAT081343",
+      "name": "서천",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "서천"
+      ]
+    },
+    {
+      "id": "NAT460000",
+      "name": "서화성",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "서화성"
+      ]
+    },
+    {
+      "id": "NAT020717",
+      "name": "석불",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "석불"
+      ]
+    },
+    {
+      "id": "NAT600768",
+      "name": "석포",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "석포"
+      ]
+    },
+    {
+      "id": "NAT610137",
+      "name": "선평",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "선평"
+      ]
+    },
+    {
+      "id": "NAT010848",
+      "name": "성환",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "성환"
+      ]
+    },
+    {
+      "id": "NAT750161",
+      "name": "센텀",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "센텀"
+      ]
+    },
+    {
+      "id": "NAT130556",
+      "name": "소요산",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "소요산"
+      ]
+    },
+    {
+      "id": "NAT011079",
+      "name": "소정리",
+      "cityCode": "12",
+      "cityName": "세종특별자치시",
+      "aliases": [
+        "소정리"
+      ]
+    },
+    {
+      "id": "NAT750254",
+      "name": "송정",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "송정"
+      ]
+    },
+    {
+      "id": "NAT150231",
+      "name": "송추",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "송추"
+      ]
+    },
+    {
+      "id": "NATH30000",
+      "name": "수서",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "수서"
+      ]
+    },
+    {
+      "id": "NAT280751",
+      "name": "수안보온천",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "수안보온천"
+      ]
+    },
+    {
+      "id": "NAT010415",
+      "name": "수원",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "수원"
+      ]
+    },
+    {
+      "id": "NAT041595",
+      "name": "순천",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "순천"
+      ]
+    },
+    {
+      "id": "NAT600692",
+      "name": "승부",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "승부"
+      ]
+    },
+    {
+      "id": "NAT601275",
+      "name": "신기",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "신기"
+      ]
+    },
+    {
+      "id": "NAT023279",
+      "name": "신녕",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "신녕"
+      ]
+    },
+    {
+      "id": "NAT010106",
+      "name": "신도림",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "신도림"
+      ]
+    },
+    {
+      "id": "NAT013067",
+      "name": "신동",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "신동"
+      ]
+    },
+    {
+      "id": "NAT080353",
+      "name": "신례원",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "신례원"
+      ]
+    },
+    {
+      "id": "NAT040352",
+      "name": "신리",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "신리"
+      ]
+    },
+    {
+      "id": "NAT021357",
+      "name": "신림",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "신림"
+      ]
+    },
+    {
+      "id": "NAT130774",
+      "name": "신망리",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "신망리"
+      ]
+    },
+    {
+      "id": "NAT470804",
+      "name": "신보성",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "신보성"
+      ]
+    },
+    {
+      "id": "NAT080216",
+      "name": "신창",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "신창"
+      ]
+    },
+    {
+      "id": "NAT810048",
+      "name": "신창원",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "신창원"
+      ]
+    },
+    {
+      "id": "NAT130888",
+      "name": "신탄리",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "신탄리"
+      ]
+    },
+    {
+      "id": "NAT011524",
+      "name": "신탄진",
+      "cityCode": "25",
+      "cityName": "대전광역시",
+      "aliases": [
+        "신탄진"
+      ]
+    },
+    {
+      "id": "NAT031179",
+      "name": "신태인",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "신태인"
+      ]
+    },
+    {
+      "id": "NAT750189",
+      "name": "신해운대",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "신해운대"
+      ]
+    },
+    {
+      "id": "NAT012016",
+      "name": "심천",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "심천"
+      ]
+    },
+    {
+      "id": "NAT650177",
+      "name": "쌍룡",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "쌍룡"
+      ]
+    },
+    {
+      "id": "NAT080045",
+      "name": "아산",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "아산"
+      ]
+    },
+    {
+      "id": "NAT020471",
+      "name": "아신",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "아신"
+      ]
+    },
+    {
+      "id": "NAT610387",
+      "name": "아우라지",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "아우라지"
+      ]
+    },
+    {
+      "id": "NAT012700",
+      "name": "아포",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "아포"
+      ]
+    },
+    {
+      "id": "NAT023601",
+      "name": "아화",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "아화"
+      ]
+    },
+    {
+      "id": "NAT8B0190",
+      "name": "안강",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "안강"
+      ]
+    },
+    {
+      "id": "NAT022558",
+      "name": "안동",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "안동"
+      ]
+    },
+    {
+      "id": "NAT010239",
+      "name": "안양",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "안양"
+      ]
+    },
+    {
+      "id": "NAT460378",
+      "name": "안중",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "안중"
+      ]
+    },
+    {
+      "id": "NAT280358",
+      "name": "앙성온천",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "앙성온천"
+      ]
+    },
+    {
+      "id": "NAT012903",
+      "name": "약목",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "약목"
+      ]
+    },
+    {
+      "id": "NAT020845",
+      "name": "양동",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "양동"
+      ]
+    },
+    {
+      "id": "NAT881323",
+      "name": "양보",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "양보"
+      ]
+    },
+    {
+      "id": "NAT600655",
+      "name": "양원",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "양원"
+      ]
+    },
+    {
+      "id": "NAT751325",
+      "name": "양자동",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "양자동"
+      ]
+    },
+    {
+      "id": "NAT020524",
+      "name": "양평",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "양평"
+      ]
+    },
+    {
+      "id": "NAT041993",
+      "name": "여수EXPO",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "여수EXPO"
+      ]
+    },
+    {
+      "id": "NAT041866",
+      "name": "여천",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "여천"
+      ]
+    },
+    {
+      "id": "NAT650253",
+      "name": "연당",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "연당"
+      ]
+    },
+    {
+      "id": "NAT340090",
+      "name": "연무대",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "연무대"
+      ]
+    },
+    {
+      "id": "NAT030396",
+      "name": "연산",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "연산"
+      ]
+    },
+    {
+      "id": "NAT130738",
+      "name": "연천",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "연천"
+      ]
+    },
+    {
+      "id": "NAT280814",
+      "name": "연풍",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "연풍"
+      ]
+    },
+    {
+      "id": "NAT8B0737",
+      "name": "영덕",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "영덕"
+      ]
+    },
+    {
+      "id": "NAT012124",
+      "name": "영동",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "영동"
+      ]
+    },
+    {
+      "id": "NAT010091",
+      "name": "영등포",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "영등포"
+      ]
+    },
+    {
+      "id": "NAT470133",
+      "name": "영암",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "영암"
+      ]
+    },
+    {
+      "id": "NAT650341",
+      "name": "영월",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "영월"
+      ]
+    },
+    {
+      "id": "NAT022188",
+      "name": "영주",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "영주"
+      ]
+    },
+    {
+      "id": "NAT023449",
+      "name": "영천",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "영천"
+      ]
+    },
+    {
+      "id": "NAT752029",
+      "name": "영해",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "영해"
+      ]
+    },
+    {
+      "id": "NAT882194",
+      "name": "예당",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "예당"
+      ]
+    },
+    {
+      "id": "NAT650515",
+      "name": "예미",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "예미"
+      ]
+    },
+    {
+      "id": "NAT080402",
+      "name": "예산",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "예산"
+      ]
+    },
+    {
+      "id": "NAT300850",
+      "name": "예천",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "예천"
+      ]
+    },
+    {
+      "id": "NAT050215",
+      "name": "오근장",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "오근장"
+      ]
+    },
+    {
+      "id": "NAT010570",
+      "name": "오산",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "오산"
+      ]
+    },
+    {
+      "id": "NAT050044",
+      "name": "오송",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "오송"
+      ]
+    },
+    {
+      "id": "NAT040667",
+      "name": "오수",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "오수"
+      ]
+    },
+    {
+      "id": "NAT881584",
+      "name": "옥곡",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "옥곡"
+      ]
+    },
+    {
+      "id": "NAT300200",
+      "name": "옥산",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "옥산"
+      ]
+    },
+    {
+      "id": "NAT130070",
+      "name": "옥수",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "옥수"
+      ]
+    },
+    {
+      "id": "NAT752787",
+      "name": "옥원",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "옥원"
+      ]
+    },
+    {
+      "id": "NAT011833",
+      "name": "옥천",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "옥천"
+      ]
+    },
+    {
+      "id": "NAT080147",
+      "name": "온양온천",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "온양온천"
+      ]
+    },
+    {
+      "id": "NAT881168",
+      "name": "완사",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "완사"
+      ]
+    },
+    {
+      "id": "NAT130104",
+      "name": "왕십리",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "왕십리"
+      ]
+    },
+    {
+      "id": "NAT012968",
+      "name": "왜관",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "왜관"
+      ]
+    },
+    {
+      "id": "NAT300669",
+      "name": "용궁",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "용궁"
+      ]
+    },
+    {
+      "id": "NAT030667",
+      "name": "용동",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "용동"
+      ]
+    },
+    {
+      "id": "NAT020641",
+      "name": "용문",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "용문"
+      ]
+    },
+    {
+      "id": "NAT010032",
+      "name": "용산",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "용산"
+      ]
+    },
+    {
+      "id": "NAT110497",
+      "name": "운천",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "운천"
+      ]
+    },
+    {
+      "id": "NATH13717",
+      "name": "울산",
+      "cityCode": "26",
+      "cityName": "울산광역시",
+      "aliases": [
+        "울산"
+      ]
+    },
+    {
+      "id": "NAT752540",
+      "name": "울진",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "울진"
+      ]
+    },
+    {
+      "id": "NAT081099",
+      "name": "웅천",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "웅천"
+      ]
+    },
+    {
+      "id": "NAT014058",
+      "name": "원동",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "원동"
+      ]
+    },
+    {
+      "id": "NAT150057",
+      "name": "원릉",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "원릉"
+      ]
+    },
+    {
+      "id": "NAT880644",
+      "name": "원북",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "원북"
+      ]
+    },
+    {
+      "id": "NAT020947",
+      "name": "원주",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "원주"
+      ]
+    },
+    {
+      "id": "NAT8B0504",
+      "name": "월포",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "월포"
+      ]
+    },
+    {
+      "id": "NAT041710",
+      "name": "율촌",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "율촌"
+      ]
+    },
+    {
+      "id": "NAT050596",
+      "name": "음성",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "음성"
+      ]
+    },
+    {
+      "id": "NAT022844",
+      "name": "의성",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "의성"
+      ]
+    },
+    {
+      "id": "NAT130312",
+      "name": "의정부",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "의정부"
+      ]
+    },
+    {
+      "id": "NAT882544",
+      "name": "이양",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "이양"
+      ]
+    },
+    {
+      "id": "NAT011916",
+      "name": "이원",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "이원"
+      ]
+    },
+    {
+      "id": "NAT030879",
+      "name": "익산",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "익산"
+      ]
+    },
+    {
+      "id": "NAT460553",
+      "name": "인주",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "인주"
+      ]
+    },
+    {
+      "id": "NATC10580",
+      "name": "인천공항T1",
+      "cityCode": "23",
+      "cityName": "인천광역시",
+      "aliases": [
+        "인천공항T1"
+      ]
+    },
+    {
+      "id": "NATC30058",
+      "name": "인천공항T2",
+      "cityCode": "23",
+      "cityName": "인천광역시",
+      "aliases": [
+        "인천공항T2"
+      ]
+    },
+    {
+      "id": "NAT032422",
+      "name": "일로",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "일로"
+      ]
+    },
+    {
+      "id": "NAT110249",
+      "name": "일산",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "일산"
+      ]
+    },
+    {
+      "id": "NAT020760",
+      "name": "일신",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "일신"
+      ]
+    },
+    {
+      "id": "NAT150167",
+      "name": "일영",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "일영"
+      ]
+    },
+    {
+      "id": "NAT600476",
+      "name": "임기",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "임기"
+      ]
+    },
+    {
+      "id": "NAT032489",
+      "name": "임성리",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "임성리"
+      ]
+    },
+    {
+      "id": "NAT040536",
+      "name": "임실",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "임실"
+      ]
+    },
+    {
+      "id": "NAT752850",
+      "name": "임원",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "임원"
+      ]
+    },
+    {
+      "id": "NAT110520",
+      "name": "임진강",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "임진강"
+      ]
+    },
+    {
+      "id": "NAT750933",
+      "name": "입실",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "입실"
+      ]
+    },
+    {
+      "id": "NAT470718",
+      "name": "장동",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "장동"
+      ]
+    },
+    {
+      "id": "NAT650050",
+      "name": "장락",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "장락"
+      ]
+    },
+    {
+      "id": "NAT8B0595",
+      "name": "장사",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "장사"
+      ]
+    },
+    {
+      "id": "NAT031638",
+      "name": "장성",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "장성"
+      ]
+    },
+    {
+      "id": "NAT081318",
+      "name": "장항",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "장항"
+      ]
+    },
+    {
+      "id": "NAT150191",
+      "name": "장흥",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "장흥"
+      ]
+    },
+    {
+      "id": "NAT130652",
+      "name": "전곡",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "전곡"
+      ]
+    },
+    {
+      "id": "NAT470584",
+      "name": "전남장흥",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "전남장흥"
+      ]
+    },
+    {
+      "id": "NAT011154",
+      "name": "전의",
+      "cityCode": "12",
+      "cityName": "세종특별자치시",
+      "aliases": [
+        "전의"
+      ]
+    },
+    {
+      "id": "NAT040257",
+      "name": "전주",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "전주"
+      ]
+    },
+    {
+      "id": "NAT300600",
+      "name": "점촌",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "점촌"
+      ]
+    },
+    {
+      "id": "NAT601774",
+      "name": "정동진",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "정동진"
+      ]
+    },
+    {
+      "id": "NAT610226",
+      "name": "정선",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "정선"
+      ]
+    },
+    {
+      "id": "NAT031314",
+      "name": "정읍",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "정읍"
+      ]
+    },
+    {
+      "id": "NAT021549",
+      "name": "제천",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "제천"
+      ]
+    },
+    {
+      "id": "NAT882141",
+      "name": "조성",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "조성"
+      ]
+    },
+    {
+      "id": "NAT011298",
+      "name": "조치원",
+      "cityCode": "12",
+      "cityName": "세종특별자치시",
+      "aliases": [
+        "조치원"
+      ]
+    },
+    {
+      "id": "NAT750412",
+      "name": "좌천",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "좌천"
+      ]
+    },
+    {
+      "id": "NAT050719",
+      "name": "주덕",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "주덕"
+      ]
+    },
+    {
+      "id": "NAT060231",
+      "name": "주안",
+      "cityCode": "23",
+      "cityName": "인천광역시",
+      "aliases": [
+        "주안"
+      ]
+    },
+    {
+      "id": "NAT752618",
+      "name": "죽변",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "죽변"
+      ]
+    },
+    {
+      "id": "NAT880408",
+      "name": "중리",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "중리"
+      ]
+    },
+    {
+      "id": "NAT050366",
+      "name": "증평",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "증평"
+      ]
+    },
+    {
+      "id": "NAT011972",
+      "name": "지탄",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "지탄"
+      ]
+    },
+    {
+      "id": "NAT020677",
+      "name": "지평",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "지평"
+      ]
+    },
+    {
+      "id": "NAT880179",
+      "name": "진례",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "진례"
+      ]
+    },
+    {
+      "id": "NATN10787",
+      "name": "진부",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "진부"
+      ]
+    },
+    {
+      "id": "NAT881538",
+      "name": "진상",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "진상"
+      ]
+    },
+    {
+      "id": "NAT880825",
+      "name": "진성",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "진성"
+      ]
+    },
+    {
+      "id": "NAT880177",
+      "name": "진영",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "진영"
+      ]
+    },
+    {
+      "id": "NAT881014",
+      "name": "진주",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "진주"
+      ]
+    },
+    {
+      "id": "NAT810195",
+      "name": "진해",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "진해"
+      ]
+    },
+    {
+      "id": "NAT880310",
+      "name": "창원",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "창원"
+      ]
+    },
+    {
+      "id": "NAT880281",
+      "name": "창원중앙",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "창원중앙"
+      ]
+    },
+    {
+      "id": "NAT010971",
+      "name": "천안",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "천안"
+      ]
+    },
+    {
+      "id": "NATH10960",
+      "name": "천안아산",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "천안아산"
+      ]
+    },
+    {
+      "id": "NAT600870",
+      "name": "철암",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "철암"
+      ]
+    },
+    {
+      "id": "NAT013629",
+      "name": "청도",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "청도"
+      ]
+    },
+    {
+      "id": "NAT130126",
+      "name": "청량리",
+      "cityCode": "11",
+      "cityName": "서울특별시",
+      "aliases": [
+        "청량리"
+      ]
+    },
+    {
+      "id": "NAT300271",
+      "name": "청리",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "청리"
+      ]
+    },
+    {
+      "id": "NAT080827",
+      "name": "청소",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "청소"
+      ]
+    },
+    {
+      "id": "NAT050114",
+      "name": "청주",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "청주"
+      ]
+    },
+    {
+      "id": "NAT050244",
+      "name": "청주공항",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "청주공항"
+      ]
+    },
+    {
+      "id": "NAT140436",
+      "name": "청평",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "청평"
+      ]
+    },
+    {
+      "id": "NAT130597",
+      "name": "초성리",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "초성리"
+      ]
+    },
+    {
+      "id": "NAT630064",
+      "name": "추암",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "추암"
+      ]
+    },
+    {
+      "id": "NAT650918",
+      "name": "추전",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "추전"
+      ]
+    },
+    {
+      "id": "NAT012355",
+      "name": "추풍령",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "추풍령"
+      ]
+    },
+    {
+      "id": "NAT600379",
+      "name": "춘양",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "춘양"
+      ]
+    },
+    {
+      "id": "NAT140873",
+      "name": "춘천",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "춘천"
+      ]
+    },
+    {
+      "id": "NAT050827",
+      "name": "충주",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "충주"
+      ]
+    },
+    {
+      "id": "NAT110265",
+      "name": "탄현",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "탄현"
+      ]
+    },
+    {
+      "id": "NAT022961",
+      "name": "탑리",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "탑리"
+      ]
+    },
+    {
+      "id": "NAT650978",
+      "name": "태백",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "태백"
+      ]
+    },
+    {
+      "id": "NAT750726",
+      "name": "태화강",
+      "cityCode": "26",
+      "cityName": "울산광역시",
+      "aliases": [
+        "태화강"
+      ]
+    },
+    {
+      "id": "NAT140098",
+      "name": "퇴계원",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "퇴계원"
+      ]
+    },
+    {
+      "id": "NAT110407",
+      "name": "파주",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "파주"
+      ]
+    },
+    {
+      "id": "NAT250007",
+      "name": "판교(경기)",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "판교(경기)"
+      ]
+    },
+    {
+      "id": "NAT081240",
+      "name": "판교(충남)",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "판교(충남)"
+      ]
+    },
+    {
+      "id": "NAT140214",
+      "name": "평내호평",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "평내호평"
+      ]
+    },
+    {
+      "id": "NATN10625",
+      "name": "평창",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "평창"
+      ]
+    },
+    {
+      "id": "NAT880702",
+      "name": "평촌",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "평촌"
+      ]
+    },
+    {
+      "id": "NAT010754",
+      "name": "평택",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "평택"
+      ]
+    },
+    {
+      "id": "NAT752245",
+      "name": "평해",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "평해"
+      ]
+    },
+    {
+      "id": "NAT8B0351",
+      "name": "포항",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "포항"
+      ]
+    },
+    {
+      "id": "NAT022053",
+      "name": "풍기",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "풍기"
+      ]
+    },
+    {
+      "id": "NAT881460",
+      "name": "하동",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "하동"
+      ]
+    },
+    {
+      "id": "NAT830200",
+      "name": "하양",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "하양"
+      ]
+    },
+    {
+      "id": "NAT880099",
+      "name": "한림정",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "한림정"
+      ]
+    },
+    {
+      "id": "NAT130627",
+      "name": "한탄강",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "한탄강"
+      ]
+    },
+    {
+      "id": "NAT650567",
+      "name": "함백",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "함백"
+      ]
+    },
+    {
+      "id": "NAT880520",
+      "name": "함안",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "함안"
+      ]
+    },
+    {
+      "id": "NAT030718",
+      "name": "함열",
+      "cityCode": "35",
+      "cityName": "전북특별자치도",
+      "aliases": [
+        "함열"
+      ]
+    },
+    {
+      "id": "NAT300558",
+      "name": "함창",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "함창"
+      ]
+    },
+    {
+      "id": "NAT032212",
+      "name": "함평",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "함평"
+      ]
+    },
+    {
+      "id": "NAT460641",
+      "name": "합덕",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "합덕"
+      ]
+    },
+    {
+      "id": "NAT470312",
+      "name": "해남",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "해남"
+      ]
+    },
+    {
+      "id": "NAT110147",
+      "name": "행신",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "행신"
+      ]
+    },
+    {
+      "id": "NAT460187",
+      "name": "향남",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "향남"
+      ]
+    },
+    {
+      "id": "NAT600527",
+      "name": "현동",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "현동"
+      ]
+    },
+    {
+      "id": "NAT080622",
+      "name": "홍성",
+      "cityCode": "34",
+      "cityName": "충청남도",
+      "aliases": [
+        "홍성"
+      ]
+    },
+    {
+      "id": "NAT014244",
+      "name": "화명",
+      "cityCode": "21",
+      "cityName": "부산광역시",
+      "aliases": [
+        "화명"
+      ]
+    },
+    {
+      "id": "NAT023127",
+      "name": "화본",
+      "cityCode": "22",
+      "cityName": "대구광역시",
+      "aliases": [
+        "화본"
+      ]
+    },
+    {
+      "id": "NAT460073",
+      "name": "화성시청",
+      "cityCode": "31",
+      "cityName": "경기도",
+      "aliases": [
+        "화성시청"
+      ]
+    },
+    {
+      "id": "NAT882755",
+      "name": "화순",
+      "cityCode": "36",
+      "cityName": "전라남도",
+      "aliases": [
+        "화순"
+      ]
+    },
+    {
+      "id": "NAT012270",
+      "name": "황간",
+      "cityCode": "33",
+      "cityName": "충청북도",
+      "aliases": [
+        "황간"
+      ]
+    },
+    {
+      "id": "NATN10230",
+      "name": "횡성",
+      "cityCode": "32",
+      "cityName": "강원특별자치도",
+      "aliases": [
+        "횡성"
+      ]
+    },
+    {
+      "id": "NAT881386",
+      "name": "횡천",
+      "cityCode": "38",
+      "cityName": "경상남도",
+      "aliases": [
+        "횡천"
+      ]
+    },
+    {
+      "id": "NAT750760",
+      "name": "효문",
+      "cityCode": "26",
+      "cityName": "울산광역시",
+      "aliases": [
+        "효문"
+      ]
+    },
+    {
+      "id": "NAT882904",
+      "name": "효천",
+      "cityCode": "24",
+      "cityName": "광주광역시",
+      "aliases": [
+        "효천"
+      ]
+    },
+    {
+      "id": "NAT752196",
+      "name": "후포",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "후포"
+      ]
+    },
+    {
+      "id": "NAT030173",
+      "name": "흑석리",
+      "cityCode": "25",
+      "cityName": "대전광역시",
+      "aliases": [
+        "흑석리"
+      ]
+    },
+    {
+      "id": "NAT752682",
+      "name": "흥부",
+      "cityCode": "37",
+      "cityName": "경상북도",
+      "aliases": [
+        "흥부"
+      ]
+    }
+  ]
+}

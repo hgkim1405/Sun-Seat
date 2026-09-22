@@ -1,0 +1,96 @@
+{
+  "routeId": "seoul-busan",
+  "stations": [
+    {
+      "id": "seoul",
+      "name": "서울",
+      "aliases": [
+        "서울",
+        "Seoul"
+      ],
+      "osmName": "서울",
+      "tagoCode": "NAT010000",
+      "korailCode": null,
+      "longitude": 126.9707793,
+      "latitude": 37.5545547,
+      "routeDistanceM": 0,
+      "source": "TAGO GetCtyAcctoTrainSttnList + OSM route mapping"
+    },
+    {
+      "id": "gwangmyeong",
+      "name": "광명",
+      "aliases": [
+        "광명",
+        "Gwangmyeong"
+      ],
+      "osmName": "광명",
+      "tagoCode": "NATH10219",
+      "korailCode": null,
+      "longitude": 126.8846978,
+      "latitude": 37.41638,
+      "routeDistanceM": 21770.995139237282,
+      "source": "TAGO GetCtyAcctoTrainSttnList + OSM route mapping"
+    },
+    {
+      "id": "osong",
+      "name": "오송",
+      "aliases": [
+        "오송",
+        "Osong"
+      ],
+      "osmName": "오송",
+      "tagoCode": "NAT050044",
+      "korailCode": null,
+      "longitude": 127.3273629,
+      "latitude": 36.6202295,
+      "routeDistanceM": 124386.30148384826,
+      "source": "TAGO GetCtyAcctoTrainSttnList + OSM route mapping"
+    },
+    {
+      "id": "daejeon",
+      "name": "대전",
+      "aliases": [
+        "대전",
+        "대전역",
+        "Daejeon"
+      ],
+      "osmName": "대전역",
+      "tagoCode": "NAT011668",
+      "korailCode": null,
+      "longitude": 127.433365,
+      "latitude": 36.3313521,
+      "routeDistanceM": 159757.15668028648,
+      "source": "TAGO GetCtyAcctoTrainSttnList + OSM route mapping"
+    },
+    {
+      "id": "dongdaegu",
+      "name": "동대구",
+      "aliases": [
+        "동대구",
+        "Dongdaegu"
+      ],
+      "osmName": "동대구",
+      "tagoCode": "NAT013271",
+      "korailCode": null,
+      "longitude": 128.6283056,
+      "latitude": 35.8791851,
+      "routeDistanceM": 286461.2945924726,
+      "source": "TAGO GetCtyAcctoTrainSttnList + OSM route mapping"
+    },
+    {
+      "id": "busan",
+      "name": "부산",
+      "aliases": [
+        "부산",
+        "Busan"
+      ],
+      "osmName": "부산",
+      "tagoCode": "NAT014445",
+      "korailCode": null,
+      "longitude": 129.0425868,
+      "latitude": 35.1155532,
+      "routeDistanceM": 401512.38846240146,
+      "source": "TAGO GetCtyAcctoTrainSttnList + OSM route mapping"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sunseat.local/schemas/poc.schema.json",
+  "title": "Sun Seat PoC API query",
+  "type": "object",
+  "properties": {
+    "resolution": {
+      "type": "string",
+      "enum": ["raw", "1m", "5m"],
+      "default": "1m"
+    }
+  },
+  "additionalProperties": false
+}
+
