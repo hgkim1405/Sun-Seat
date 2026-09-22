@@ -11,6 +11,7 @@
     "sync:tago-stations": "node scripts/sync-tago-stations.mjs",
     "sync:korail-seat-layouts": "node scripts/sync-korail-seat-layouts.mjs",
     "validate:seat-layouts": "node scripts/validate-seat-layouts.mjs",
+    "create:demo-data": "python\\.venv\\Scripts\\python.exe python\\scripts\\create_demo_dataset.py",
     "sync:korail-timetables": "python\\.venv\\Scripts\\python.exe python\\scripts\\sync_korail_timetables.py",
     "parse:korail-timetables": "python\\.venv\\Scripts\\python.exe python\\scripts\\parse_korail_timetables.py"
   },

@@ -32,7 +32,12 @@ const seatCatalog = ref([]);
 const seatCatalogLoading = ref(false);
 const seatCatalogError = ref('');
 const seatDialog = ref(false);
+const dateMenu = ref(false);
+const selectedSource = ref('schedule');
 const selectedCatalogItem = ref(null);
+const mobileMenuOpen = ref(false);
+const vehicleMenuOpen = ref(false);
+const analysisMode = ref('train');
 const previewByTrainId = ref({});
 const loading = ref(false);
 const previewLoading = ref(false);
@@ -72,6 +77,33 @@ const visibleTrains = computed(() => {
   return trains.value.filter((train) => vehicleFilter.value.includes(train.trainGradeCode));
 });
 const stationItems = computed(() => stations.value.filter((station) => station.tagoCode).map((station) => ({ title: station.name, value: station.name })));
+const searchTrainTypeItems = computed(() => trainTypes.value.map((type) => ({ title: type.name, value: type.id })));
+const sourceItems = [
+  { id: 'schedule', title: '열차 일정', description: 'TAGO REST API · 실제 응답 기반 Node 필터·캐시', status: '사용 중', statusColor: 'secondary', source: '공공데이터포털 TAGO REST API', usage: '출발·도착역, 운행일, 열차번호와 실제 운행 시간을 검색 결과에 반영합니다.' },
+  { id: 'route', title: '철도 선형', description: 'OpenStreetMap Overpass · 경로 geometry / tunnel 기반', status: 'PoC', statusColor: 'info', source: 'OpenStreetMap Overpass API', usage: '열차 이동 경로와 터널 구간을 연결해 구간별 햇빛 노출을 계산합니다.' },
+  { id: 'sun', title: '태양 위치', description: 'NOAA 방식 · 맑은 날 창가 방향 계산', status: '사용 중', statusColor: 'secondary', source: 'NOAA Solar Position 방식', usage: '시간과 위치를 기준으로 태양 방위각·고도를 계산하고 좌우 창가를 비교합니다.' },
+  { id: 'seat', title: '좌석 지도', description: 'KORAIL 공식 좌석배치 기반 · 좌석 줄·번호·객차 구조', status: '공식', statusColor: 'primary', source: 'KORAIL 공식 좌석배치 원본', usage: '차량 형식과 호차별 좌석 구조를 표시하고 선택 좌석 분석의 기준으로 사용합니다.' },
+  { id: 'availability', title: '잔여좌석', description: '실시간 잔여좌석은 사용하지 않음', status: '미사용', statusColor: 'warning', source: '서비스 범위에서 제외', usage: '예약 가능 여부나 잔여좌석을 임의로 표시하지 않고, 햇빛 분석과 공식 좌석 구조만 제공합니다.' },
+];
+const selectedSourceItem = computed(() => sourceItems.find((item) => item.id === selectedSource.value) ?? sourceItems[0]);
+const dateDisplayValue = computed(() => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(form.value.date)) return '';
+  return new Intl.DateTimeFormat('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'short',
+  }).format(new Date(`${form.value.date}T00:00:00+09:00`));
+});
+const datePickerValue = computed({
+  get: () => /^\d{4}-\d{2}-\d{2}$/.test(form.value.date)
+    ? new Date(`${form.value.date}T00:00:00`)
+    : null,
+  set: (value) => {
+    form.value.date = normalizeDateValue(value);
+    dateMenu.value = false;
+  },
+});
 const catalogItems = computed(() => seatCatalog.value.length ? seatCatalog.value : trainTypes.value.map((type) => ({ ...type, available: type.seatMapAvailable, layouts: [] })));
 const selectedCatalogLayouts = computed(() => selectedCatalogItem.value?.layouts ?? []);
 const loadingMessage = computed(() => {
@@ -110,6 +142,23 @@ const selectedSeatExposure = computed(() => {
     tunnelMinutes: summary.tunnelMinutes,
   };
 });
+const detailTimelineTotal = computed(() => (exposure.value?.segments ?? []).reduce((total, segment) => total + Number(segment.durationMinutes || 0), 0) || 1);
+const timelineStations = computed(() => {
+  const seen = new Set();
+  return (selectedTrain.value?.stationTimeline ?? []).filter((event) => {
+    if (seen.has(event.station)) return false;
+    seen.add(event.station);
+    return true;
+  });
+});
+const comparisonSeat = computed(() => {
+  if (!selectedSeat.value || !selectedCar.value) return null;
+  const selectedRow = Number(selectedSeat.value.row ?? selectedSeat.value.layoutRow);
+  return selectedCar.value.seats.find((seat) => {
+    const row = Number(seat.row ?? seat.layoutRow);
+    return row === selectedRow && seat.position === 'WINDOW' && seat.physicalSide !== selectedSeat.value.physicalSide;
+  }) ?? null;
+});
 
 function messageOf(caught) {
   return caught instanceof Error ? caught.message : String(caught);
@@ -117,6 +166,51 @@ function messageOf(caught) {
 
 function timeText(value) {
   return String(value ?? '').slice(11, 16) || '--:--';
+}
+
+function normalizeDateValue(value) {
+  if (!value) return '';
+  if (typeof value === 'string') {
+    const iso = value.match(/\d{4}-\d{2}-\d{2}/)?.[0];
+    if (iso) return iso;
+  }
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  const pad = (part) => String(part).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function clearDate() {
+  form.value.date = '';
+  dateMenu.value = false;
+}
+
+function sideLabel(value) {
+  if (value === 'LEFT') return '왼쪽 창가 추천';
+  if (value === 'RIGHT') return '오른쪽 창가 추천';
+  return '햇빛 방향 분석';
+}
+
+function segmentLabel(type) {
+  return {
+    LEFT: '왼쪽 햇빛',
+    RIGHT: '오른쪽 햇빛',
+    WEAK: '약한 햇빛',
+    TUNNEL: '터널',
+    NIGHT: '밤',
+  }[type] ?? '햇빛 분석';
+}
+
+function segmentClass(type) {
+  return String(type ?? '').toLowerCase();
+}
+
+function friendlyError(value) {
+  const text = String(value ?? '');
+  if (text.includes('Active route dataset')) return '햇빛 분석 경로 데이터를 준비하고 있습니다. 잠시 후 다시 시도해 주세요.';
+  if (text.includes('TAGO_SCHEDULE_URL') || text.includes('TAGO_SERVICE_KEY')) return '열차 일정 데이터가 준비되지 않았습니다. TAGO 환경변수를 확인해 주세요.';
+  if (text.includes('Calculation service')) return '햇빛 분석 서버에 연결할 수 없습니다. 계산 서비스 상태를 확인해 주세요.';
+  return text || '잠시 후 다시 시도해 주세요.';
 }
 
 function formatDateLabel(value) {
@@ -135,6 +229,10 @@ function formatFare(value) {
   return Number.isFinite(value) ? `${value.toLocaleString('ko-KR')}원` : '요금 미제공';
 }
 
+function trainTypeName(code) {
+  return trainTypes.value.find((item) => item.id === code)?.name ?? code;
+}
+
 function setTimePreset(preset) {
   selectedPreset.value = preset.id;
   form.value.departureTimeFrom = preset.from;
@@ -143,6 +241,12 @@ function setTimePreset(preset) {
 
 function markCustomTime() {
   selectedPreset.value = 'CUSTOM';
+}
+
+function swapStations() {
+  const origin = form.value.origin;
+  form.value.origin = form.value.destination;
+  form.value.destination = origin;
 }
 
 function clearGradeFilter() {
@@ -213,6 +317,7 @@ async function loadSeatLayout(train) {
       seatLayout.value = result.layout;
       seatLayoutVariants.value = result.variantLayouts?.length ? result.variantLayouts : result.layout ? [result.layout] : [];
       selectedCarNumber.value = result.layout.cars?.[0]?.carNumber ?? null;
+      selectedSeat.value = preferredSeatFor(result.layout.cars?.[0]);
     } else if (result.layoutVariants?.length) {
       seatLayoutError.value = '공식 좌석도 변형은 확인했지만 현재 편성 정보를 자동으로 연결하지 못했습니다.';
     }
@@ -224,7 +329,16 @@ async function loadSeatLayout(train) {
 function selectSeatLayout(layout) {
   seatLayout.value = layout;
   selectedCarNumber.value = layout.cars?.[0]?.carNumber ?? null;
-  selectedSeat.value = null;
+  selectedSeat.value = preferredSeatFor(layout.cars?.[0]);
+}
+
+function preferredSeatFor(car) {
+  return car?.seats?.find((seat) => seat.position === 'WINDOW') ?? car?.seats?.[0] ?? null;
+}
+
+function selectSeatCar(car) {
+  selectedCarNumber.value = car?.carNumber ?? null;
+  selectedSeat.value = preferredSeatFor(car);
 }
 
 function seatRowsFor(car) {
@@ -340,6 +454,7 @@ async function calculateSelected(train) {
   error.value = '';
   if (exposure.value) {
     await loadSeatLayout(train);
+    analysisMode.value = 'train';
     view.value = 'detail';
     return;
   }
@@ -347,9 +462,26 @@ async function calculateSelected(train) {
   try {
     exposure.value = await calculateExposure(exposureRequest(train));
     await loadSeatLayout(train);
+    analysisMode.value = 'train';
     view.value = 'detail';
   } catch (caught) { error.value = messageOf(caught); }
   finally { loading.value = false; }
+}
+
+function openSeatSelection() {
+  if (!selectedTrain.value || !exposure.value) return;
+  view.value = 'seats';
+}
+
+function showSeatAnalysis() {
+  if (!selectedSeat.value) return;
+  analysisMode.value = 'seat';
+  view.value = 'detail';
+}
+
+function goToSearch() {
+  mobileMenuOpen.value = false;
+  view.value = 'search';
 }
 
 async function loadPoc() {
@@ -387,88 +519,167 @@ onMounted(async () => {
 
 <template>
   <v-app>
-    <v-app-bar class="sunseat-appbar" flat border>
-      <v-container class="appbar-inner" max-width="1180">
-        <v-btn class="brand" variant="text" @click="view = 'search'"><span class="brand-mark">☼</span><span><b>SunSeat</b><small>햇빛자리</small></span></v-btn>
-        <v-spacer />
-        <v-btn :variant="['search', 'trains', 'detail'].includes(view) ? 'tonal' : 'text'" color="primary" @click="view = 'search'">열차 검색</v-btn>
-        <v-btn :variant="view === 'poc' ? 'tonal' : 'text'" color="primary" @click="loadPoc">PoC 확인</v-btn>
-        <v-btn :variant="view === 'about' ? 'tonal' : 'text'" color="primary" @click="openAbout">데이터 출처</v-btn>
-      </v-container>
-    </v-app-bar>
+    <header class="site-header">
+      <div class="header-inner">
+        <button class="brand-button" type="button" aria-label="SunSeat 홈" @click="goToSearch">
+          <span class="brand-sun" aria-hidden="true"><span /></span>
+          <span class="brand-copy"><strong>SunSeat</strong><small>햇빛자리</small></span>
+        </button>
+        <nav class="main-nav" aria-label="주요 메뉴">
+          <button type="button" :class="{ active: ['search', 'trains'].includes(view) }" @click="goToSearch">열차 검색</button>
+          <button type="button" :class="{ active: ['seats', 'detail'].includes(view) }" @click="selectedTrain && exposure ? (view = 'seats') : goToSearch()">좌석 선택</button>
+          <button type="button" :class="{ active: view === 'about' }" @click="openAbout">서비스 소개</button>
+          <button type="button" :class="{ active: view === 'poc' }" @click="loadPoc">햇빛 가이드</button>
+          <button type="button" @click="openAbout">자주 묻는 질문</button>
+        </nav>
+        <div class="header-tools">
+          <button type="button" @click="loadPoc"><v-icon icon="mdi-information-outline" /> PoC 확인</button>
+          <button type="button" @click="openAbout">데이터 출처</button>
+          <button type="button" class="profile-button" aria-label="사용자 메뉴"><v-icon icon="mdi-account-outline" /></button>
+        </div>
+        <button class="mobile-menu-button" type="button" :aria-expanded="mobileMenuOpen" aria-label="메뉴 열기" @click="mobileMenuOpen = !mobileMenuOpen"><v-icon :icon="mobileMenuOpen ? 'mdi-close' : 'mdi-menu'" /></button>
+      </div>
+      <div v-if="mobileMenuOpen" class="mobile-nav">
+        <button type="button" @click="goToSearch">열차 검색</button>
+        <button type="button" @click="selectedTrain && exposure ? (view = 'seats', mobileMenuOpen = false) : goToSearch()">좌석 선택</button>
+        <button type="button" @click="openAbout(); mobileMenuOpen = false">서비스 소개</button>
+        <button type="button" @click="loadPoc(); mobileMenuOpen = false">햇빛 가이드</button>
+        <button type="button" @click="openAbout(); mobileMenuOpen = false">데이터 출처</button>
+      </div>
+    </header>
 
-    <v-main>
-      <v-container class="page" max-width="1180">
-    <section v-if="view === 'search'" class="hero search-hero"><div class="hero-copy"><p class="eyebrow">SUNLIGHT-AWARE RAIL TRAVEL</p><h1>여행 전에,<br /><em>햇빛이 머무는 자리</em><br />를 확인하세요.</h1><p class="subtitle">실제 운행 열차와 철도 선형을 바탕으로 출발 시간과 햇빛 방향을 함께 비교합니다.</p></div><div class="sun-orbit"><span>sun</span></div></section>
-
-    <v-card class="search-panel search-card" :class="{ compact: view !== 'search' }" elevation="1">
-      <v-card-text>
-        <v-row align="center">
-          <v-col cols="12" md="3"><v-select v-model="form.origin" :items="stationItems" label="출발역" :loading="stationLoading" hide-details="auto" /></v-col>
-          <v-col cols="12" md="3"><v-select v-model="form.destination" :items="stationItems" label="도착역" :loading="stationLoading" hide-details="auto" /></v-col>
-          <v-col cols="12" md="3"><v-text-field v-model="form.date" type="date" label="여행 날짜" hide-details="auto" /></v-col>
-          <v-col cols="12" md="3"><v-btn block size="large" color="primary" :loading="loading" :disabled="stationLoading" @click="searchTrains">열차 찾기</v-btn></v-col>
-        </v-row>
-        <v-divider class="my-2" />
-        <v-row class="search-options-row">
-          <v-col cols="12"><div class="filter-label">출발 시간대</div><v-chip-group v-model="selectedPreset" selected-class="text-primary" class="preset-row" @update:model-value="(id) => { const preset = TIME_PRESETS.find((item) => item.id === id); if (preset) setTimePreset(preset); }"><v-chip v-for="preset in TIME_PRESETS" :key="preset.id" :value="preset.id" filter variant="outlined">{{ preset.label }}</v-chip></v-chip-group><div class="time-range"><v-text-field v-model="form.departureTimeFrom" type="time" density="compact" hide-details aria-label="출발 시간 시작" @update:model-value="markCustomTime" /><span>~</span><v-text-field v-model="form.departureTimeTo" type="time" density="compact" hide-details aria-label="출발 시간 종료" @update:model-value="markCustomTime" /></div></v-col>
-        </v-row>
-      </v-card-text>
-    </v-card>
-
-    <section v-if="loadingMessage" class="notice loading-notice"><strong>{{ loadingMessage }}</strong><small v-if="previewLoading">열차 검색 결과를 먼저 표시하고, 최대 20개 열차의 햇빛 요약을 묶어서 계산합니다.</small></section>
-    <section v-if="error" class="notice error"><strong>요청을 완료하지 못했습니다.</strong><br />{{ error }}<small>실시간 일정은 Node 환경에 TAGO_SCHEDULE_URL·TAGO_SERVICE_KEY가 필요합니다. 정상적인 0건 결과는 오류가 아닙니다.</small></section>
-
-    <section v-if="view === 'trains'" class="section">
-      <div class="section-heading"><div><p class="eyebrow">TRAIN LIST</p><h2>{{ form.origin }} → {{ form.destination }}</h2><p class="muted">{{ formatDateLabel(form.date) }} · {{ searchSummary?.conditions?.departureTimeFrom || searchSummary?.conditions?.departureTimeTo ? `${searchSummary?.conditions?.departureTimeFrom || '00:00'} ~ ${searchSummary?.conditions?.departureTimeTo || '23:59'}` : '전체 시간' }}</p></div><span class="source-badge">{{ scheduleState }}</span></div>
-      <div v-if="searchSummary" class="condition-summary"><span><strong>{{ visibleTrains.length }}개</strong> 표시</span><span v-if="vehicleFilter[0] !== 'ALL'">전체 {{ searchSummary.totalMatches }}개 중 차량 필터 적용</span><span v-else>전체 {{ searchSummary.totalMatches }}개 검색</span><span v-if="searchSummary.firstDeparture">오늘 운행 {{ timeText(searchSummary.firstDeparture) }} ~ {{ timeText(searchSummary.lastDeparture) }}</span><span v-if="searchSummary.departedHidden">출발 완료 {{ searchSummary.departedHidden }}개 제외</span></div>
-      <div v-if="searchState === 'SUCCESS'" class="result-filter-bar"><div class="result-filter-copy"><p class="eyebrow">FILTER RESULTS</p><strong>차량 종류</strong><span>검색 후 원하는 차량만 골라보세요.</span></div><v-btn-toggle :model-value="vehicleFilter" multiple divided color="primary" class="grade-toggle result-grade-toggle" @update:model-value="updateVehicleFilter"><v-btn value="ALL" size="small">전체 차량</v-btn><v-btn v-for="type in resultFilterTrainTypes" :key="type.id" :value="type.id" size="small">{{ type.name }}<small v-if="type.count !== null" class="grade-count">{{ type.count }}편</small></v-btn></v-btn-toggle></div>
-      <div v-if="searchState === 'SUCCESS' && visibleTrains.length" class="train-list"><button v-for="train in visibleTrains" :key="train.id" class="train-card" @click="calculateSelected(train)"><div><span class="train-name">{{ train.trainGradeName }} <small>{{ train.trainNumber }}</small></span><strong class="train-times">{{ timeText(train.departureAt) }} <i>→</i> {{ timeText(train.arrivalAt) }}</strong><div class="train-meta"><span>{{ train.origin }} → {{ train.destination }}</span><span>{{ formatDuration(train.durationMinutes) }}</span><span>{{ formatFare(train.adultFare) }}</span></div></div><div v-if="previewFor(train)" class="sun-preview"><small>햇빛 미리보기</small><strong>{{ previewFor(train).recommendedSide }}</strong><span>분석 결과 보기 →</span></div><div v-else class="sun-preview pending"><small>{{ previewLoading ? '햇빛 계산 중' : '햇빛 분석' }}</small><span>열차 선택하기 →</span></div></button></div>
-      <div v-else-if="searchState === 'SUCCESS' && vehicleFilter[0] !== 'ALL'" class="empty-state panel"><h3>선택한 차량종류의 열차가 없습니다.</h3><p>검색 결과에서 다른 차량을 선택하거나 전체 차량으로 돌아가세요.</p><button class="secondary-button" @click="clearGradeFilter">전체 차량 보기</button></div>
-      <div v-else-if="searchState === 'NO_TRAINS_IN_TIME_RANGE'" class="empty-state panel"><h3>선택한 시간대에는 열차가 없습니다.</h3><p>{{ searchSummary?.conditions?.departureTimeFrom || '00:00' }} ~ {{ searchSummary?.conditions?.departureTimeTo || '23:59' }} 사이의 운행편을 찾지 못했습니다.</p><div v-if="nearbyTrains.length" class="nearby-list"><strong>가장 가까운 열차</strong><button v-for="train in nearbyTrains" :key="train.id" class="nearby-train" @click="calculateSelected(train)"><span>{{ timeText(train.departureAt) }} {{ train.trainGradeName }} {{ train.trainNumber }}</span><small>{{ formatDuration(train.durationMinutes) }}</small></button></div><p v-else class="muted">앞뒤 시간대에 확인 가능한 열차도 없습니다.</p></div>
-      <div v-else-if="searchState === 'NO_TRAINS_FOR_GRADE'" class="empty-state panel"><h3>선택한 차량종류의 열차가 없습니다.</h3><p>이 날짜와 구간에는 선택한 차량종류가 운행하지 않습니다.</p><button class="secondary-button" @click="clearGradeFilter">전체 차량 보기</button></div>
-      <div v-else class="empty-state panel"><h3>{{ searchState === 'NO_TRAINS' && searchSummary?.conditions?.date === form.date ? '해당 날짜에 표시할 열차가 없습니다.' : '이 구간의 열차가 없습니다.' }}</h3><p v-if="searchResult?.searchState?.reason === 'ALL_DEPARTED'">오늘 출발이 끝난 열차는 기본 검색에서 제외했습니다.</p><p v-else>다른 날짜 또는 출발·도착역을 선택해 다시 검색해 주세요.</p></div>
-      <p v-if="previewError" class="muted preview-note">햇빛 미리보기는 아직 준비되지 않았습니다. 열차를 선택하면 개별 계산을 시도합니다.</p>
-    </section>
-
-    <section v-if="view === 'detail' && exposure" class="section">
-      <button class="back-button" @click="view = 'trains'">← 목록으로</button>
-      <div class="section-heading"><div><p class="eyebrow">TRAIN DETAIL</p><h2>{{ selectedTrain?.trainGradeName }} {{ selectedTrain?.trainNumber }}</h2><p class="muted">{{ timeText(selectedTrain?.departureAt) }} → {{ timeText(selectedTrain?.arrivalAt) }} · {{ formatDuration(selectedTrain?.durationMinutes) }}</p></div><div class="recommendation"><small>추천 창가 방향</small><strong>{{ exposure.recommendedSide }}</strong></div></div>
-      <div class="summary-grid"><article class="metric featured"><span>추천 방향</span><strong>{{ exposure.recommendedSide }}</strong><small>맑은 날·터널 제외 노출 가중치</small></article><article class="metric"><span>좌측 노출</span><strong>{{ exposure.summary.leftExposureMinutes.toFixed(1) }}분</strong><small>가중치 {{ exposure.summary.leftWeightedExposure.toFixed(2) }}</small></article><article class="metric"><span>우측 노출</span><strong>{{ exposure.summary.rightExposureMinutes.toFixed(1) }}분</strong><small>가중치 {{ exposure.summary.rightWeightedExposure.toFixed(2) }}</small></article><article class="metric"><span>분석 정밀도</span><strong>{{ exposure.precision.position }}</strong><small>{{ exposure.precision.schedule }}</small></article></div>
-      <div class="content-grid"><article class="panel"><p class="eyebrow">TIMELINE</p><div class="segment-list"><div v-for="segment in exposure.segments" :key="`${segment.start}-${segment.type}`" :class="['segment', segment.type.toLowerCase()]"><span>{{ segment.type }}</span><strong>{{ segment.durationMinutes.toFixed(1) }}분</strong><small>{{ segment.start.slice(11, 16) }}–{{ segment.end.slice(11, 16) }}</small></div></div></article>
-        <article class="panel seat-panel"><p class="eyebrow">SEAT LAYOUT</p><h3 v-if="seatLayout">{{ seatLayout.rollingStockType }}</h3><h3 v-else-if="seatLayoutLoading">공식 좌석도를 불러오는 중입니다…</h3><h3 v-else>좌석도는 확인된 차량형식에만 제공합니다.</h3><p class="muted">실시간 잔여좌석은 사용하지 않습니다. 공식 좌석배치에서 확인된 좌석 구조와 햇빛 방향만 표시합니다.</p>
-          <div v-if="seatLayout" class="seat-layout"><div v-if="seatLayoutVariants.length > 1" class="layout-variant-tabs"><span>공식 편성 변형</span><button v-for="variant in seatLayoutVariants" :key="variant.id" type="button" :class="{ selected: seatLayout.id === variant.id }" @click="selectSeatLayout(variant)">{{ variant.id }} · {{ variant.totalSeatCount }}석</button></div><div class="car-tabs"><button v-for="car in seatLayout.cars" :key="car.carNumber" type="button" :class="{ selected: selectedCarNumber === car.carNumber }" @click="selectedCarNumber = car.carNumber; selectedSeat = null">{{ car.carNumber }}호차</button></div><div v-if="selectedCar && hasVisualSeatRows" class="seat-map"><div class="seat-map-direction"><span>창측</span><span>통로</span><span>창측</span></div><div v-for="row in selectedCarRows" :key="row.row" class="seat-row"><div class="seat-side seat-side-left"><button v-for="seat in row.left" :key="seat.seatNumber" type="button" :class="['seat-button', seat.physicalSide.toLowerCase(), { selected: selectedSeat?.seatNumber === seat.seatNumber }]" @click="selectedSeat = seat"><strong>{{ seat.seatNumber }}</strong><small>{{ seat.position === 'WINDOW' ? '창가' : seat.position === 'AISLE' ? '통로' : '좌석' }}</small></button></div><span class="seat-aisle">{{ row.row }}</span><div class="seat-side seat-side-right"><button v-for="seat in row.right" :key="seat.seatNumber" type="button" :class="['seat-button', seat.physicalSide.toLowerCase(), { selected: selectedSeat?.seatNumber === seat.seatNumber }]" @click="selectedSeat = seat"><strong>{{ seat.seatNumber }}</strong><small>{{ seat.position === 'WINDOW' ? '창가' : seat.position === 'AISLE' ? '통로' : '좌석' }}</small></button></div></div></div><div v-else-if="selectedCar" class="seat-grid seat-grid-list"><button v-for="seat in selectedCar.seats" :key="seat.seatNumber" type="button" :class="['seat-button', seat.physicalSide.toLowerCase(), { selected: selectedSeat?.seatNumber === seat.seatNumber }]" @click="selectedSeat = seat"><strong>{{ seat.seatNumber }}</strong><small>{{ seat.position === 'WINDOW' ? '창가' : seat.position === 'AISLE' ? '통로' : '좌석' }}</small></button></div><div v-if="selectedSeatExposure" class="seat-result"><strong>{{ selectedCarNumber }}호차 {{ selectedSeatExposure.seatNumber }}</strong><span>{{ selectedSeatExposure.position === 'WINDOW' ? '창가' : '좌석' }} · {{ selectedSeatExposure.travelSide }} 측</span><b>예상 직사광 {{ selectedSeatExposure.directSunMinutes.toFixed(1) }}분</b><small>가중치 {{ selectedSeatExposure.weightedExposure.toFixed(2) }} · 터널 {{ selectedSeatExposure.tunnelMinutes.toFixed(1) }}분</small></div></div>
-          <p v-else-if="seatLayoutError" class="muted">{{ seatLayoutError }}</p><div v-else class="cabin-placeholder"><span>SEAT LAYOUT</span><b>확인된 좌석도 없음 · 좌우 햇빛 추천만 제공</b></div>
-        </article></div>
-    </section>
-
-    <section v-if="view === 'poc'" class="section"><div v-if="pocLoading" class="notice">PoC 결과를 불러오는 중입니다…</div><div v-else-if="pocError" class="notice error">{{ pocError }}</div><template v-else-if="pocSummary"><div class="section-heading"><div><p class="eyebrow">TECHNICAL POC</p><h2>서울 → 부산 햇빛 노출 검증</h2><p class="muted">실제 OSM route · 30초 샘플 · 위치는 시간표 보간 추정값</p></div><span class="status pass">{{ pocSummary.pocStatus }}</span></div><section class="summary-grid"><article class="metric featured"><span>추천 창가</span><strong>{{ pocSummary.recommendedSide }}</strong><small>weighted exposure 기준</small></article><article class="metric"><span>LEFT weighted</span><strong>{{ pocSummary.leftWeightedExposure.toFixed(2) }}</strong></article><article class="metric"><span>RIGHT weighted</span><strong>{{ pocSummary.rightWeightedExposure.toFixed(2) }}</strong></article><article class="metric"><span>터널</span><strong>{{ pocSummary.tunnelDistanceKm.toFixed(1) }} km</strong><small>{{ pocSummary.tunnelPercentage.toFixed(1) }}%</small></article></section><section class="panel timeline-panel"><div class="panel-header"><div><p class="eyebrow">EXPOSURE TIMELINE</p><h2>좌우 노출과 터널 구간</h2></div><select v-model="resolution" @change="changePocResolution"><option value="1m">1분 표시</option><option value="5m">5분 표시</option><option value="raw">30초 원본</option></select></div><div class="time-labels"><span>{{ timelineStart }}</span><span>{{ timelineEnd }}</span></div><div class="track"><span v-for="(item, index) in timeline" :key="`${item.time}-${index}`" class="tick" :class="exposureClass(item, 'LEFT')" @click="selectedIndex = index" /></div><div class="track right-track"><span v-for="(item, index) in timeline" :key="`r-${item.time}-${index}`" class="tick" :class="exposureClass(item, 'RIGHT')" @click="selectedIndex = index" /></div><div class="legend"><span><i class="legend-dot left" /> LEFT</span><span><i class="legend-dot right" /> RIGHT</span><span><i class="legend-dot tunnel" /> TUNNEL</span><span><i class="legend-dot weak" /> WEAK</span></div><input v-model.number="selectedIndex" type="range" min="0" :max="Math.max(0, timeline.length - 1)" class="slider" /></section><section class="content-grid"><RouteMap :route="route" :current="current" /><article class="panel current-card"><div class="section-title">선택 시점 데이터</div><div v-if="current" class="data-list"><div><span>시간</span><strong>{{ current.time.replace('T', ' ').slice(0, 19) }}</strong></div><div><span>좌표</span><strong>{{ current.lat.toFixed(5) }}, {{ current.lon.toFixed(5) }}</strong></div><div><span>태양 방위각 / 고도</span><strong>{{ current.sunAzimuth.toFixed(1) }}° / {{ current.sunAltitude.toFixed(1) }}°</strong></div><div><span>상태</span><strong :class="current.rawSide.toLowerCase()">{{ current.rawSide }}</strong></div></div></article></section></template></section>
-
-    <section v-if="view === 'about'" class="section about-page"><v-row><v-col cols="12" md="7"><v-card class="source-card" elevation="1"><v-card-item><v-card-title>계산에 사용한 자료</v-card-title><v-card-subtitle>실제 API와 공식 구조 데이터를 기준으로 표시합니다.</v-card-subtitle></v-card-item><v-list lines="two" class="source-v-list"><v-list-item title="열차 일정" subtitle="TAGO REST API · 실제 응답 기반 Node 필터·캐시" /><v-list-item title="철도 선형" subtitle="OpenStreetMap Overpass · 서울–부산 PoC route" /><v-list-item title="태양 위치" subtitle="NOAA 방정식 · 맑은 날 창가 방향 계산" /><v-list-item title="좌석 지도" subtitle="KORAIL 공식 좌석배치 HTML · 좌석 줄·번호·객차 구조" /><v-list-item title="잔여좌석" subtitle="실시간 잔여좌석은 사용하지 않음" /></v-list><v-card-actions><v-chip color="secondary" variant="tonal">© OpenStreetMap contributors</v-chip></v-card-actions></v-card></v-col><v-col cols="12" md="5"><v-card class="source-card train-types-card" elevation="1"><v-card-item><v-card-title>TRAIN TYPES</v-card-title><v-card-subtitle>실제 API 차량종류 · 차량을 클릭하면 전체 좌석 배치가 열립니다.</v-card-subtitle></v-card-item><v-list lines="two" class="train-type-list"><v-list-item v-for="item in catalogItems" :key="item.id" :disabled="seatCatalogLoading" rounded="lg" @click="openSeatCatalog(item)"><template #prepend><v-avatar color="primary" variant="tonal" size="36">{{ item.id }}</v-avatar></template><v-list-item-title>{{ item.name }}</v-list-item-title><v-list-item-subtitle>{{ item.available ? '공식 좌석 배치 확인' : '공식 원본 확인 필요' }}</v-list-item-subtitle><template #append><v-chip size="small" :color="item.available ? 'secondary' : 'warning'" variant="tonal">{{ item.available ? '좌석 보기' : '미확인' }}</v-chip></template></v-list-item></v-list><v-card-actions><v-progress-linear v-if="seatCatalogLoading" color="primary" indeterminate /><span v-else class="muted">{{ catalogItems.length }}개 차량 종류</span></v-card-actions></v-card></v-col></v-row></section>
-      </v-container>
-    </v-main>
-
-    <v-dialog v-model="seatDialog" max-width="1440" scrollable>
-      <v-card class="seat-dialog-card">
-        <v-card-title class="dialog-title"><div><span class="eyebrow">OFFICIAL SEAT PLAN</span><h2>공식 좌석 전체 비교</h2></div><v-btn variant="text" aria-label="닫기" @click="seatDialog = false">닫기</v-btn></v-card-title>
-        <v-divider />
-        <v-card-text>
-          <v-progress-linear v-if="seatCatalogLoading" color="primary" indeterminate class="mb-4" />
-          <div v-if="selectedCatalogItem" class="dialog-train-heading"><div><h3>{{ selectedCatalogItem.name }}</h3><p>{{ selectedCatalogItem.id }} · 공식 좌석 원본 기준</p></div><v-chip :color="selectedCatalogItem.available ? 'secondary' : 'warning'" variant="tonal">{{ selectedCatalogItem.available ? '구조 좌석 확인' : '원본 확인 필요' }}</v-chip></div>
-          <v-alert v-if="!selectedCatalogItem?.available" type="warning" variant="tonal" class="mb-4">공식 좌석 식별자 원본이 없어 좌석을 임의로 생성하지 않았습니다.</v-alert>
-          <div v-if="selectedCatalogItem?.available" class="seat-catalog-variants">
-            <section v-for="layout in selectedCatalogLayouts" :key="layout.id" class="seat-catalog-variant">
-              <div class="seat-catalog-variant-heading"><strong>{{ layout.id }}</strong><span>{{ layout.rollingStockType }} · {{ layout.totalSeatCount.toLocaleString('ko-KR') }}석</span></div>
-              <div class="seat-catalog-cars">
-                <v-card v-for="car in layout.cars" :key="`${layout.id}-${car.carNumber}`" class="seat-catalog-car" variant="outlined">
-                  <v-card-title>{{ car.carNumber }}호차 <small>{{ car.seats.length }}석</small></v-card-title>
-                  <v-card-text><div class="seat-plan-direction"><span>창측</span><span>통로</span><span>창측</span></div><div v-for="row in seatRowsFor(car)" :key="`${layout.id}-${car.carNumber}-${row.row}`" class="seat-plan-row"><div class="seat-plan-side"><span v-for="seat in row.left" :key="seat.seatNumber" :class="['seat-chip', seat.physicalSide.toLowerCase()]">{{ seat.seatNumber }}</span></div><span class="seat-plan-aisle">{{ row.row }}</span><div class="seat-plan-side"><span v-for="seat in row.right" :key="seat.seatNumber" :class="['seat-chip', seat.physicalSide.toLowerCase()]">{{ seat.seatNumber }}</span></div></div></v-card-text>
-                </v-card>
-              </div>
-            </section>
+    <main>
+      <section v-if="view === 'search'" class="home-hero">
+        <div class="hero-background" aria-hidden="true" />
+        <div class="page-container hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">A MORE COMFORTABLE TRAIN JOURNEY</p>
+            <h1>여행의 설렘은 그대로,<br /><em>햇빛은</em> 조금 더 피해서.</h1>
+            <p>실제 운행 열차와 철도 선형을 바탕으로 여행 시간대별 햇빛 방향을 분석해,<br class="desktop-only" /> 더 편안한 좌석을 추천해 드립니다.</p>
           </div>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+          <div class="hero-note" aria-hidden="true"><span>햇빛은 풍경이 되고,</span><span>당신의 여행은 더 특별해집니다.</span><i /></div>
+        </div>
+      </section>
+
+      <section v-if="view === 'search'" class="page-container search-panel-wrap">
+        <form class="search-panel" @submit.prevent="searchTrains">
+          <div class="search-panel-head">
+            <div class="search-title"><span class="icon-disc"><v-icon icon="mdi-train" /></span><div><h2>열차 검색</h2><p>여행 정보를 입력하고 햇빛이 적은 좌석을 찾아보세요.</p></div></div>
+          </div>
+          <div class="search-fields">
+            <label class="field-group">
+              <span>출발역</span>
+              <span class="field-control"><v-icon icon="mdi-train" /><select v-model="form.origin" :disabled="stationLoading" aria-label="출발역"><option v-for="station in stationItems" :key="station.value" :value="station.value">{{ station.title }}</option></select><v-icon class="field-chevron" icon="mdi-chevron-down" /></span>
+            </label>
+            <button class="swap-button" type="button" aria-label="출발역과 도착역 바꾸기" @click="swapStations"><v-icon icon="mdi-swap-horizontal" /></button>
+            <label class="field-group">
+              <span>도착역</span>
+              <span class="field-control"><v-icon icon="mdi-map-marker-outline" /><select v-model="form.destination" :disabled="stationLoading" aria-label="도착역"><option v-for="station in stationItems" :key="station.value" :value="station.value">{{ station.title }}</option></select><v-icon class="field-chevron" icon="mdi-chevron-down" /></span>
+            </label>
+            <div class="field-group">
+              <span>여행 날짜</span>
+              <v-menu v-model="dateMenu" :close-on-content-click="false" location="bottom start" min-width="320">
+                <template #activator="{ props: dateProps }">
+                  <button v-bind="dateProps" class="field-control date-control" type="button" aria-label="여행 날짜">
+                    <v-icon icon="mdi-calendar-blank-outline" /><span :class="{ placeholder: !dateDisplayValue }">{{ dateDisplayValue || '날짜를 선택하세요' }}</span><v-icon v-if="dateDisplayValue" class="clear-field" icon="mdi-close-circle" @click.stop="clearDate" />
+                  </button>
+                </template>
+                <v-date-picker v-model="datePickerValue" locale="ko" first-day-of-week="1" color="primary" show-adjacent-months hide-header />
+              </v-menu>
+            </div>
+            <div class="field-group vehicle-field">
+              <span>차량</span>
+              <button class="field-control" type="button" aria-haspopup="listbox" :aria-expanded="vehicleMenuOpen" @click="vehicleMenuOpen = !vehicleMenuOpen">
+                <v-icon icon="mdi-train-variant" /><span>{{ form.trainGradeCodes.length ? form.trainGradeCodes.map(trainTypeName).join(', ') : '전체 차량' }}</span><v-icon class="field-chevron" :icon="vehicleMenuOpen ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
+              </button>
+              <div v-if="vehicleMenuOpen" class="vehicle-menu">
+                <label><input v-model="form.trainGradeCodes" type="checkbox" value="ALL" @change="form.trainGradeCodes = []" /> 전체 차량</label>
+                <label v-for="type in searchTrainTypeItems" :key="type.value"><input v-model="form.trainGradeCodes" type="checkbox" :value="type.value" /> {{ type.title }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="search-options">
+            <div class="preset-group"><span class="filter-label">시간대</span><div class="preset-list"><button v-for="preset in TIME_PRESETS" :key="preset.id" type="button" :class="{ selected: selectedPreset === preset.id }" @click="setTimePreset(preset)">{{ preset.label }}</button></div></div>
+            <div class="time-group"><span class="filter-label">출발 시간 <small>(선택)</small></span><div class="time-range"><label class="time-control"><v-icon icon="mdi-clock-outline" /><input v-model="form.departureTimeFrom" type="time" aria-label="출발 시간 시작" @input="markCustomTime" /></label><b>~</b><label class="time-control"><v-icon icon="mdi-clock-outline" /><input v-model="form.departureTimeTo" type="time" aria-label="출발 시간 종료" @input="markCustomTime" /></label></div></div>
+            <button class="primary-button search-submit" type="submit" :disabled="loading"><v-icon icon="mdi-magnify" /> {{ loading ? '검색 중…' : '햇빛 적은 열차 찾기' }} <v-icon icon="mdi-arrow-right" /></button>
+          </div>
+          <p v-if="error" class="form-error">{{ friendlyError(error) }}</p>
+        </form>
+      </section>
+
+      <section v-if="view === 'trains'" class="results-page page-container">
+        <div class="compact-search-bar">
+          <div class="compact-route"><strong>{{ form.origin }}</strong><v-icon icon="mdi-arrow-right" /><strong>{{ form.destination }}</strong></div>
+          <div class="compact-date"><v-icon icon="mdi-calendar-blank-outline" /> {{ formatDateLabel(form.date) || '날짜 미지정' }}</div>
+          <div class="compact-actions"><button type="button" @click="goToSearch">검색 조건 수정</button><button type="button" @click="searchTrains">다시 검색</button></div>
+        </div>
+        <div class="results-heading"><div><p class="eyebrow">TRAIN LIST</p><h1>{{ form.origin }} <span>→</span> {{ form.destination }}</h1><p>{{ formatDateLabel(form.date) || '날짜 미지정' }} · {{ selectedPreset === 'ALL' ? '전체 시간' : TIME_PRESETS.find((item) => item.id === selectedPreset)?.label }}</p></div><span class="source-badge">{{ scheduleState || 'TAGO' }}</span></div>
+        <div v-if="loadingMessage" class="loading-banner"><v-progress-circular indeterminate size="18" width="2" color="primary" /> {{ loadingMessage }}</div>
+        <div v-if="error" class="error-banner"><v-icon icon="mdi-alert-circle-outline" /><span>{{ friendlyError(error) }}</span></div>
+        <div v-if="searchSummary" class="result-summary-strip"><strong>{{ searchSummary.displayedCount ?? visibleTrains.length }}개</strong><span>표시</span><span>전체 {{ searchSummary.totalCount ?? visibleTrains.length }}개 검색</span><span>오늘 운행 {{ searchSummary.firstDeparture ? timeText(searchSummary.firstDeparture) : '--:--' }} ~ {{ searchSummary.lastDeparture ? timeText(searchSummary.lastDeparture) : '--:--' }}</span></div>
+        <div v-if="searchState === 'SUCCESS'" class="result-filters">
+          <div class="filter-copy"><p class="eyebrow">FILTER RESULTS</p><strong>차량 종류</strong><span>검색 후 원하는 차량만 골라보세요.</span></div>
+          <div class="filter-pills"><button type="button" :class="{ selected: vehicleFilter.includes('ALL') }" @click="clearGradeFilter">전체 차량 <small v-if="searchSummary">{{ searchSummary.totalCount ?? '' }}</small></button><button v-for="type in resultFilterTrainTypes" :key="type.id" type="button" :class="{ selected: vehicleFilter.includes(type.id) }" @click="updateVehicleFilter(vehicleFilter.includes(type.id) ? vehicleFilter.filter((value) => value !== type.id) : [...vehicleFilter.filter((value) => value !== 'ALL'), type.id])">{{ type.name }} <small v-if="type.count !== null">{{ type.count }}편</small></button></div>
+        </div>
+        <div v-if="searchState === 'SUCCESS' && visibleTrains.length" class="train-list">
+          <button v-for="train in visibleTrains" :key="train.id" class="train-row" type="button" @click="calculateSelected(train)">
+            <div class="train-identity"><strong>{{ train.trainGradeName }}</strong><small>{{ train.trainNumber }}</small><span v-if="previewFor(train)" class="sun-status"><v-icon icon="mdi-white-balance-sunny" /> 햇빛 분석 완료</span></div>
+            <div class="train-times"><strong>{{ timeText(train.departureAt) }}</strong><span class="time-line"><i /><small>{{ formatDuration(train.durationMinutes) }}</small><i /></span><strong>{{ timeText(train.arrivalAt) }}</strong><small class="stations">{{ train.origin }} → {{ train.destination }}</small></div>
+            <div class="train-price"><small>{{ train.trainGradeName }}</small><strong>{{ formatFare(train.adultFare) }}</strong></div>
+            <div class="train-sun"><v-icon icon="mdi-white-balance-sunny" /><div><strong>{{ previewFor(train) ? sideLabel(previewFor(train).recommendedSide) : (previewLoading ? '햇빛 계산 중' : '햇빛 분석 준비 중') }}</strong><small>{{ previewFor(train) ? '노선과 시간대 기준 분석 완료' : '열차를 선택하면 상세 분석합니다' }}</small></div></div>
+            <span class="row-detail">상세 보기 <v-icon icon="mdi-chevron-right" /></span>
+          </button>
+        </div>
+        <div v-else-if="searchState === 'SUCCESS' && vehicleFilter[0] !== 'ALL'" class="empty-state"><h2>선택한 차량 종류의 열차가 없습니다.</h2><p>검색 결과에서 다른 차량을 선택하거나 전체 차량으로 돌아가세요.</p><button class="secondary-button" type="button" @click="clearGradeFilter">전체 차량 보기</button></div>
+        <div v-else-if="searchState === 'NO_TRAINS_IN_TIME_RANGE'" class="empty-state"><h2>선택한 시간대에는 열차가 없습니다.</h2><p>{{ searchSummary?.conditions?.departureTimeFrom || '00:00' }} ~ {{ searchSummary?.conditions?.departureTimeTo || '23:59' }} 사이의 운행편을 찾지 못했습니다.</p><div v-if="nearbyTrains.length" class="nearby-list"><strong>가장 가까운 열차</strong><button v-for="train in nearbyTrains" :key="train.id" type="button" @click="calculateSelected(train)"><span>{{ timeText(train.departureAt) }} {{ train.trainGradeName }} {{ train.trainNumber }}</span><small>{{ formatDuration(train.durationMinutes) }}</small></button></div></div>
+        <div v-else class="empty-state"><h2>해당 날짜에 표시할 열차가 없습니다.</h2><p>다른 날짜 또는 출발·도착역을 선택해 다시 검색해 주세요.</p></div>
+        <p v-if="previewError" class="muted preview-note">열차 목록은 표시되었지만 햇빛 미리보기를 준비하지 못했습니다. 열차를 선택하면 개별 계산을 시도합니다.</p>
+      </section>
+
+      <section v-if="view === 'detail' && exposure && analysisMode === 'train'" class="detail-page page-container">
+        <div class="detail-breadcrumb"><button type="button" @click="view = 'trains'">‹ 검색 결과로 돌아가기</button><span>열차 검색</span><v-icon icon="mdi-chevron-right" /><span>열차 상세</span></div>
+        <div class="detail-journey-bar">
+          <span><v-icon icon="mdi-swap-horizontal" /> {{ selectedTrain.origin }} <b>→</b> {{ selectedTrain.destination }}</span><span><v-icon icon="mdi-calendar-blank-outline" /> {{ form.date }} ({{ new Date(form.date + 'T00:00:00+09:00').toLocaleDateString('ko-KR', { weekday: 'short' }) }})</span><span><v-icon icon="mdi-train-variant" /> {{ selectedTrain.trainGradeName }} {{ selectedTrain.trainNumber }}</span><span><v-icon icon="mdi-clock-outline" /> {{ timeText(selectedTrain.departureAt) }} → {{ timeText(selectedTrain.arrivalAt) }} <small>({{ formatDuration(selectedTrain.durationMinutes) }})</small></span>
+        </div>
+        <div class="detail-title-block"><div><p class="eyebrow">A MORE COMFORTABLE TRAIN JOURNEY</p><h1>여행의 설렘은 그대로,<br /><em>햇빛은</em> 조금 더 가까이.</h1><p>지금 이 열차의 햇빛 방향을 분석했습니다. 가장 좋은 자리에 앉아 더 특별한 여행을 시작해 보세요.</p></div><div class="detail-note">햇빛이 머무는 창가가<br />여행을 더 특별하게 만듭니다.<i /></div></div>
+        <div class="detail-layout">
+          <div class="detail-main-column">
+            <article class="analysis-main-card white-card">
+              <div class="card-heading"><div><p class="eyebrow">SUNSEAT ANALYSIS</p><h2>{{ selectedTrain.trainGradeName }} {{ selectedTrain.trainNumber }} 햇빛 분석</h2><p>열차가 이동하는 동안 좌우 창가에 들어오는 햇빛을 비교했습니다.</p></div><span class="recommend-pill"><v-icon icon="mdi-seat-outline" /> 추천 좌석 방향</span></div>
+              <div class="recommendation-banner"><div class="recommendation-icon"><v-icon icon="mdi-seat-outline" /></div><div><small>추천 좌석 방향</small><strong>{{ sideLabel(exposure.recommendedSide) }}</strong><p>이 열차는 전체 구간에서 {{ exposure.recommendedSide === 'LEFT' ? '왼쪽' : '오른쪽' }}으로 햇빛이 더 적게 비칩니다.</p></div></div>
+              <div class="analysis-metrics"><div><v-icon icon="mdi-white-balance-sunny" /><span>{{ exposure.recommendedSide === 'LEFT' ? '왼쪽' : '오른쪽' }} 창가<strong>{{ exposure.recommendedSide === 'LEFT' ? exposure.summary.leftExposureMinutes.toFixed(0) : exposure.summary.rightExposureMinutes.toFixed(0) }}분</strong><small>직접 햇빛 예상 시간</small></span></div><div><v-icon icon="mdi-chart-bar" /><span>반대편 창가<strong>{{ exposure.recommendedSide === 'LEFT' ? exposure.summary.rightExposureMinutes.toFixed(0) : exposure.summary.leftExposureMinutes.toFixed(0) }}분</strong><small>추천 방향보다 더 많음</small></span></div></div>
+              <div class="timeline-card"><div class="timeline-heading"><h3>구간별 햇빛 타임라인</h3><span>열차 이동 중 방향과 강도를 시간대별로 확인할 수 있습니다.</span></div><div class="timeline-track"><span v-for="segment in exposure.segments" :key="segment.start + '-' + segment.type" :class="['timeline-segment', segmentClass(segment.type)]" :style="{ flex: Math.max(0.12, Number(segment.durationMinutes || 0) / detailTimelineTotal) }" :title="segmentLabel(segment.type)">{{ segmentLabel(segment.type) }}</span></div><div class="timeline-stops"><span v-for="station in timelineStations" :key="station.station"><b>{{ timeText(station.time || station.arrivalAt || station.departureAt) }}</b><small>{{ station.station }}</small></span></div></div>
+            </article>
+          </div>
+          <aside class="detail-side-column">
+            <article class="train-info-card white-card"><div class="card-heading"><h2><v-icon icon="mdi-train-variant" /> 열차 정보</h2><span class="light-pill">실제 운행</span></div><div class="train-info-image"><img src="/images/sunseat-train-detail.png" alt="열차와 호수 풍경" /></div><dl><div><dt>운행 구간</dt><dd>{{ selectedTrain.origin }} → {{ selectedTrain.destination }}</dd></div><div><dt>운행 일자</dt><dd>{{ form.date }}</dd></div><div><dt>출발 / 도착</dt><dd>{{ timeText(selectedTrain.departureAt) }} → {{ timeText(selectedTrain.arrivalAt) }}</dd></div></dl></article>
+            <article class="seat-cta-card"><div><v-icon icon="mdi-seat-outline" /><h2>이 열차에서 좌석을 선택해 보세요.</h2><p>햇빛 분석 결과를 참고해 더 좋은 자리를 선택할 수 있습니다.</p></div><button class="primary-button" type="button" @click="openSeatSelection">좌석 선택하기 <v-icon icon="mdi-arrow-right" /></button></article>
+          </aside>
+        </div>
+      </section>
+
+      <section v-if="view === 'seats' && selectedTrain" class="seat-page page-container">
+        <div class="seat-hero"><div><p class="eyebrow">A MORE COMFORTABLE TRAIN JOURNEY</p><h1>좌석 선택</h1><p>햇빛과 함께하는, 더 특별한 좌석을 선택하세요.<br />SunSeat의 햇빛 분석으로 여행이 더 즐거워집니다.</p></div><div class="hero-note">좋은 풍경이 좋은 여행을 만듭니다.<i /></div></div>
+        <div class="seat-journey-bar"><span><v-icon icon="mdi-train" /> {{ selectedTrain.origin }} <b>→</b> {{ selectedTrain.destination }}</span><span>{{ timeText(selectedTrain.departureAt) }} → {{ timeText(selectedTrain.arrivalAt) }}</span><span>{{ selectedTrain.trainGradeName }} {{ selectedTrain.trainNumber }}</span><button type="button" @click="view = 'trains'">열차 정보 보기 <v-icon icon="mdi-arrow-right" /></button></div>
+        <section class="car-selector white-card"><div><h2>호차 선택</h2><p>좌석을 선택하면 오른쪽에서 상세 정보를 확인할 수 있습니다.</p></div><div class="car-tabs"><button v-for="car in seatLayout?.cars ?? []" :key="car.carNumber" type="button" :class="{ selected: selectedCarNumber === car.carNumber }" @click="selectSeatCar(car)">{{ car.carNumber }}호차</button></div></section>
+        <div class="seat-content-grid">
+          <article class="seat-map-panel white-card"><div class="card-heading"><div><h2><v-icon icon="mdi-white-balance-sunny" /> {{ selectedCarNumber || 1 }}호차 좌석도</h2><p>햇빛 방향과 세기 정보가 표시된 좌석도입니다.</p></div><span class="help-pill">좌석 선택 도움말 <v-icon icon="mdi-help-circle-outline" /></span></div><div v-if="seatLayoutLoading" class="loading-box"><v-progress-circular indeterminate color="primary" /> 공식 좌석도를 불러오는 중입니다.</div><div v-else-if="selectedCar && hasVisualSeatRows" class="seat-map-scroller"><div class="seat-map-direction"><span>← {{ selectedTrain.origin }} 방향</span><b>열차 진행 방향</b><span>{{ selectedTrain.destination }} 방향 →</span></div><div class="seat-map-guide"><span><i class="sun-dot strong" /> 왼쪽 창가</span><span><i class="sun-dot weak" /> 오른쪽 창가</span></div><div class="reference-seat-cabin"><div v-for="row in selectedCarRows" :key="row.row" class="reference-seat-row"><span class="row-number">{{ row.row }}</span><div class="seat-side"><button v-for="seat in row.left" :key="seat.seatNumber" type="button" :class="['seat-button', seat.physicalSide.toLowerCase(), { selected: selectedSeat?.seatNumber === seat.seatNumber, recommended: seat.position === 'WINDOW' && seat.physicalSide === 'SIDE_B' }]" @click="selectedSeat = seat"><span>☀</span><strong>{{ seat.seatNumber }}</strong></button></div><span class="seat-aisle">통로</span><div class="seat-side"><button v-for="seat in row.right" :key="seat.seatNumber" type="button" :class="['seat-button', seat.physicalSide.toLowerCase(), { selected: selectedSeat?.seatNumber === seat.seatNumber, recommended: seat.position === 'WINDOW' && seat.physicalSide === 'SIDE_B' }]" @click="selectedSeat = seat"><span>☀</span><strong>{{ seat.seatNumber }}</strong></button></div></div></div><div class="seat-map-legend"><span><i class="legend-seat strong" /> 강한 햇빛</span><span><i class="legend-seat medium" /> 보통 햇빛</span><span><i class="legend-seat weak" /> 약한 햇빛</span></div></div><div v-else class="empty-map"><span>SEAT LAYOUT</span><strong>{{ seatLayoutError || '공식 좌석도 확인 후 좌석 구조를 표시합니다.' }}</strong></div></article>
+          <aside class="seat-info-panel white-card"><div class="card-heading"><h2><v-icon icon="mdi-seat-outline" /> 선택 좌석 정보</h2><span class="recommend-pill"><v-icon icon="mdi-crown-outline" /> 추천 좌석</span></div><div v-if="selectedSeat" class="selected-seat-summary"><div class="seat-icon-large"><v-icon icon="mdi-seat" /></div><div><p class="eyebrow">{{ selectedTrain.trainGradeName }}</p><h2>{{ selectedCarNumber }}호차 {{ selectedSeat.seatNumber }}</h2><p>{{ selectedSeat.position === 'WINDOW' ? '창가' : selectedSeat.position === 'AISLE' ? '통로' : '좌석' }} · {{ selectedSeat.physicalSide === 'SIDE_A' ? '왼쪽' : '오른쪽' }}</p></div></div><div v-else class="seat-empty-state"><v-icon icon="mdi-cursor-default-click-outline" /><strong>좌석을 선택해 주세요</strong><span>좌석을 선택하면 햇빛 정보를 보여드립니다.</span></div><div class="seat-metrics"><div><v-icon icon="mdi-white-balance-sunny" /><span>예상 직사광<strong>{{ selectedSeatExposure ? selectedSeatExposure.directSunMinutes.toFixed(0) + '분' : '—' }}</strong></span></div><div><v-icon icon="mdi-star-four-points-outline" /><span>추천 등급<strong>{{ selectedSeat ? (selectedSeatExposure?.travelSide === exposure?.recommendedSide ? '매우 좋음' : '좋음') : '선택 대기' }}</strong></span></div></div><button class="primary-button wide" type="button" :disabled="!selectedSeat" @click="showSeatAnalysis">이 좌석으로 분석 보기 <v-icon icon="mdi-arrow-right" /></button><p class="disclaimer"><v-icon icon="mdi-lightbulb-on-outline" /> 실제 좌석 예약 가능 여부는 제공하지 않습니다.</p></aside>
+        </div>
+      </section>
+
+      <section v-if="view === 'detail' && exposure && analysisMode === 'seat' && selectedSeat" class="seat-analysis-page page-container">
+        <div class="detail-breadcrumb"><button type="button" @click="view = 'seats'">‹ 좌석 선택으로 돌아가기</button><span>좌석 분석 결과</span></div>
+        <div class="detail-title-block seat-analysis-title"><div><p class="eyebrow">SELECTED SEAT ANALYSIS</p><h1>선택 좌석 <em>분석 결과</em></h1><p>햇빛 방향을 분석한 결과, 선택하신 좌석은 쾌적한 여행에 좋은 조건을 가지고 있습니다.</p></div><div class="detail-note">좋은 자리는<br />더 특별한 풍경을 만듭니다.<i /></div></div>
+        <div class="seat-analysis-summary white-card"><div class="seat-analysis-seat"><div class="seat-icon-large"><v-icon icon="mdi-seat" /></div><div><span class="recommend-pill">추천 좌석</span><h2>{{ selectedCarNumber }}호차 {{ selectedSeat.seatNumber }}</h2><p>{{ selectedSeat.position === 'WINDOW' ? '창가' : '좌석' }} · {{ selectedSeat.physicalSide === 'SIDE_A' ? '왼쪽' : '오른쪽' }}</p><small>전반적으로 햇빛이 적어 쾌적한 여행을 즐길 수 있습니다.</small></div></div><div class="seat-analysis-metrics"><div><v-icon icon="mdi-white-balance-sunny" /><span>맑은 날 기준 예상 직사광<strong>{{ selectedSeatExposure?.directSunMinutes.toFixed(0) }}분</strong></span></div><div><v-icon icon="mdi-chart-bar" /><span>반대편 {{ comparisonSeat?.seatNumber || '창가' }} 비교<strong>{{ comparisonSeat ? '동일 기준 비교' : '비교 좌석 없음' }}</strong></span></div><div><v-icon icon="mdi-thumb-up-outline" /><span>추천 결과<strong>대체로 쾌적한 좌석입니다.</strong></span></div></div></div>
+        <div class="seat-analysis-columns"><article class="white-card"><div class="card-heading"><h2>시간대별 햇빛 분석</h2><span>{{ selectedCarNumber }}호차 {{ selectedSeat.seatNumber }}</span></div><div class="timeline-track large"><span v-for="segment in exposure.segments" :key="segment.start + '-seat-' + segment.type" :class="['timeline-segment', segmentClass(segment.type)]" :style="{ flex: Math.max(0.12, Number(segment.durationMinutes || 0) / detailTimelineTotal) }">{{ segmentLabel(segment.type) }}</span></div><div class="timeline-stops"><span v-for="station in timelineStations" :key="station.station"><b>{{ timeText(station.time || station.arrivalAt || station.departureAt) }}</b><small>{{ station.station }}</small></span></div></article><article class="white-card comparison-card"><div class="card-heading"><h2>동일 열차 · 동일 호차 좌석 비교</h2></div><div class="compare-seats"><div class="compare-seat selected"><strong>{{ selectedSeat.seatNumber }}</strong><span>선택 좌석</span><b>{{ selectedSeatExposure?.directSunMinutes.toFixed(0) }}분</b></div><div v-if="comparisonSeat" class="compare-seat"><strong>{{ comparisonSeat.seatNumber }}</strong><span>반대편 창가</span><b>분석 기준 확인</b></div></div><button class="secondary-button" type="button" @click="view = 'seats'">다른 좌석 보기 <v-icon icon="mdi-arrow-right" /></button></article></div>
+      </section>
+
+      <section v-if="view === 'poc'" class="page-container simple-page"><div v-if="pocLoading" class="loading-box">PoC 결과를 불러오는 중입니다…</div><div v-else-if="pocError" class="error-banner">{{ friendlyError(pocError) }}</div><template v-else-if="pocSummary"><div class="simple-heading"><p class="eyebrow">TECHNICAL POC</p><h1>서울 → 부산 햇빛 노출 검증</h1><p>실제 경로·시간표·태양 위치 계산을 연결한 기술 검증 화면입니다.</p></div><div class="poc-metrics"><div><span>추천 창가</span><strong>{{ pocSummary.recommendedSide }}</strong></div><div><span>LEFT weighted</span><strong>{{ pocSummary.leftWeightedExposure.toFixed(2) }}</strong></div><div><span>RIGHT weighted</span><strong>{{ pocSummary.rightWeightedExposure.toFixed(2) }}</strong></div><div><span>터널</span><strong>{{ pocSummary.tunnelDistanceKm.toFixed(1) }}km</strong></div></div><div class="poc-grid"><section class="white-card timeline-panel"><div class="card-heading"><h2>좌우 노출과 터널 구간</h2><select v-model="resolution" @change="changePocResolution"><option value="1m">1분 표시</option><option value="5m">5분 표시</option><option value="raw">30초 원본</option></select></div><div class="poc-track"><span v-for="(item, index) in timeline" :key="item.time + index" :class="exposureClass(item, 'LEFT')" @click="selectedIndex = index" /></div><input v-model.number="selectedIndex" type="range" min="0" :max="Math.max(0, timeline.length - 1)" class="slider" /></section><RouteMap :route="route" :current="current" /></div></template></section>
+
+      <section v-if="view === 'about'" class="page-container simple-page about-page"><div class="simple-heading"><p class="eyebrow">TRUSTED DATA FOUNDATION</p><h1>햇빛자리의 데이터 출처</h1><p>실제 운행 일정과 공개·공식 구조 데이터를 기준으로 햇빛 방향을 계산합니다.</p></div><div class="about-grid"><article class="white-card source-card"><h2>계산에 사용한 자료</h2><div class="source-list"><button v-for="source in sourceItems" :key="source.id" type="button" :class="{ selected: selectedSource === source.id }" @click="selectedSource = source.id"><span class="source-item-icon"><v-icon :icon="source.id === 'schedule' ? 'mdi-calendar-clock-outline' : source.id === 'route' ? 'mdi-vector-polyline' : source.id === 'sun' ? 'mdi-white-balance-sunny' : 'mdi-seat-outline'" /></span><span><strong>{{ source.title }}</strong><small>{{ source.description }}</small></span><v-chip size="small" :color="source.statusColor" variant="tonal">{{ source.status }}</v-chip></button></div><div class="source-detail-panel"><p class="eyebrow">{{ selectedSourceItem.title }}</p><p>{{ selectedSourceItem.usage }}</p><small>{{ selectedSourceItem.source }}</small></div></article><article class="white-card train-types-card"><h2>TRAIN TYPES</h2><p>실제 API 차량 종류와 공식 좌석 구조 상태입니다.</p><div class="catalog-list"><button v-for="item in catalogItems" :key="item.id" type="button" @click="openSeatCatalog(item)"><span><strong>{{ item.name }}</strong><small>{{ item.id }}</small></span><v-chip size="small" :color="item.available ? 'secondary' : 'warning'" variant="tonal">{{ item.available ? '확인됨' : '일부 확인' }}</v-chip><v-icon icon="mdi-chevron-right" /></button></div></article></div></section>
+    </main>
+    <footer class="site-footer"><div class="page-container footer-inner"><div class="footer-brand"><span class="brand-sun small" aria-hidden="true"><span /></span><strong>SunSeat</strong><small>햇빛자리</small></div><p>햇빛이 덜한, 더 좋은 여행의 시작</p><span>© 2026 SunSeat. 더 편안한 기차 여행을 위해.</span></div></footer>
+    <v-dialog v-model="seatDialog" max-width="1440" scrollable><v-card class="seat-dialog-card"><v-card-title><div><span class="eyebrow">OFFICIAL SEAT PLAN</span><h2>공식 좌석 전체 비교</h2></div><v-btn variant="text" @click="seatDialog = false">닫기</v-btn></v-card-title><v-divider /><v-card-text><div v-if="selectedCatalogItem" class="dialog-train-heading"><div><h3>{{ selectedCatalogItem.name }}</h3><p>{{ selectedCatalogItem.id }} · 공식 좌석 원본 기준</p></div><v-chip :color="selectedCatalogItem.available ? 'secondary' : 'warning'" variant="tonal">{{ selectedCatalogItem.available ? '구조 좌석 확인' : '원본 확인 필요' }}</v-chip></div><div v-if="selectedCatalogItem?.available" class="seat-catalog-variants"><section v-for="layout in selectedCatalogLayouts" :key="layout.id" class="seat-catalog-variant"><div class="seat-catalog-variant-heading"><strong>{{ layout.id }}</strong><span>{{ layout.rollingStockType }} · {{ layout.totalSeatCount.toLocaleString('ko-KR') }}석</span></div><div class="seat-catalog-cars"><v-card v-for="car in layout.cars" :key="layout.id + '-' + car.carNumber" class="seat-catalog-car" variant="outlined"><v-card-title>{{ car.carNumber }}호차 <small>{{ car.seats.length }}석</small></v-card-title><v-card-text><div v-for="row in seatRowsFor(car)" :key="layout.id + '-' + car.carNumber + '-' + row.row" class="seat-plan-row"><div class="seat-plan-side"><span v-for="seat in row.left" :key="seat.seatNumber" class="seat-chip">{{ seat.seatNumber }}</span></div><span class="seat-plan-aisle">{{ row.row }}</span><div class="seat-plan-side"><span v-for="seat in row.right" :key="seat.seatNumber" class="seat-chip">{{ seat.seatNumber }}</span></div></div></v-card-text></v-card></div></section></div><p v-else class="muted">공식 좌석 식별자 원본이 없어 좌석을 임의로 생성하지 않았습니다.</p></v-card-text></v-card></v-dialog>
   </v-app>
 </template>

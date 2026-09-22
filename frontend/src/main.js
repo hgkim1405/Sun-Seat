@@ -1,10 +1,27 @@
 import { createApp } from 'vue';
 import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
+import { ko } from 'vuetify/locale';
+import '@mdi/font/css/materialdesignicons.css';
+import '@fontsource/nanum-brush-script/400.css';
 import App from './App.vue';
 import './style.css';
 
 const vuetify = createVuetify({
+  locale: {
+    locale: 'ko',
+    fallback: 'ko',
+    messages: { ko },
+  },
+  date: {
+    locale: { ko: 'ko-KR' },
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: { mdi },
+  },
   theme: {
     defaultTheme: 'sunseat',
     themes: {
